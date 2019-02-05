@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Simple Commerce",
-    "slug": "Simple Commerce",
+    "name": "SimpleCommerce",
+    "slug": "SimpleCommerce",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
