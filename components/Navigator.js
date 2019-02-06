@@ -13,4 +13,3 @@ const Navigator = StackNavigator(
 );
 
 export default Navigator;
-//https://shift.infinite.red/react-navigation-drawer-tutorial-a802fc3ee6dc
