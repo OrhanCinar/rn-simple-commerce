@@ -1,4 +1,6 @@
 import React from "react";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+
 import {
   StyleSheet,
   Text,
@@ -12,22 +14,49 @@ import {
 import Login from "./components/Login";
 import Main from "./components/Main";
 import Product from "./components/Product";
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  static navigationOptions = {
+    title: 'Home',
+  };
+
   render() {
+
+     {/* return <AppContainer />; */}
+
     return (
       <View style={styles.container}>
         <Login />
         {/* <Main /> */}
         {/* <Product /> */}
+        
+       
       </View>
     );
   }
 }
+
+
+
+const AppNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Category: CategoryScreen,
+    PRoduct: ProductScreen,
+    Cart: CartScreen
+  },
+  {
+    initialRouteName: "Home"
+  }
+);
+
+export default AppNavigator;
+
 
 const styles = StyleSheet.create({
   container: {
