@@ -12,7 +12,10 @@ import {
 
 class Login extends React.Component {
   state = {};
-  onLogin() {}
+  onLogin() {
+    this.props.navigation.navigate("Main", { id: 0 });
+  }
+
   render() {
     return (
       <ImageBackground
