@@ -9,7 +9,9 @@ import {
   Alert
 } from "react-native";
 
+import Login from "./components/Login";
 import Main from "./components/Main";
+import Product from "./components/Product";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,7 +21,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Main />
+        <Login />
+        {/* <Main /> */}
+        {/* <Product /> */}
       </View>
     );
   }
