@@ -10,6 +10,10 @@ import {
 
 class Main extends React.Component {
   state = {};
+  static navigationOptions = {
+    title: "Products"
+  };
+
   render() {
     return (
       <View style={styles.headerContainer}>
