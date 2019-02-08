@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  StyleSheet,
-  Button,
-  ScrollView
-} from "react-native";
+import { View, Text, TextInput, Image, Button, ScrollView } from "react-native";
+
+import styles from "./styles/Cart.style";
 
 class Cart extends Component {
   state = {};
@@ -16,19 +10,29 @@ class Cart extends Component {
       <View>
         <ScrollView>
           <View>
-            <Image accessibilityLabel="PRODUCT IMAGE" />
-            <Text>PRODUCT NAME</Text>
-            <Text>PRODUCT Price</Text>
-            <Text>PRODUCT Quantity</Text>
-            <Text>PRODUCT Total</Text>
+            <Image
+              id="32740307068"
+              accessibilityLabel="product Image"
+              source={require("../assets/Products/Images/32740307068_01.jpg")}
+              style={styles.productItem}
+            />
+            <View>
+              <Text style={styles.productHeader}>Sandisk 64gb SdCard</Text>
+            </View>
+            <View style={styles.priceContainer}>
+              <Text style={styles.oldPrice}>12.00</Text>
+              <Text style={styles.price}>10.00</Text>
+            </View>
+            <Text>5</Text>
+            <Text>50.00</Text>
             <Button>REMOVE ITEM</Button>
           </View>
         </ScrollView>
 
         <View>
-          <Text>TOTAL</Text>
-          <Text>DISCOUNT</Text>
-          <Text>SUB TOTAL</Text>
+          <Text>TOTAL : 50.00</Text>
+          <Text>DISCOUNT : 0.00</Text>
+          <Text>SUB TOTAL : 50.00</Text>
         </View>
       </View>
     );
