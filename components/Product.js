@@ -4,11 +4,11 @@ import {
   Text,
   TextInput,
   Image,
-  StyleSheet,
   Button,
   Alert,
   ImageBackground
 } from "react-native";
+import styles from "./styles/Product.style";
 
 class Product extends React.Component {
   state = {};
@@ -70,62 +70,3 @@ class Product extends React.Component {
 }
 
 export default Product;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //backgroundColor: "#fff",
-    flexWrap: "wrap",
-    flexDirection: "column",
-    marginTop: 40,
-    marginLeft: 5,
-    marginRight: 5,
-    justifyContent: "space-between"
-  },
-  productItem: {
-    //marginBottom: 10,
-    width: 200,
-    height: 200
-  },
-  imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 8,
-    borderWidth: 0.9,
-    borderColor: "#202020",
-    marginBottom: 5
-  },
-  productHeader: {
-    fontSize: 30,
-    fontWeight: "bold"
-  },
-  btnAdd: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#841584",
-    height: 36,
-    marginBottom: 5
-  },
-  priceContainer: {
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  price: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "green"
-  },
-  oldPrice: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "red",
-    textDecorationLine: "line-through",
-    textDecorationStyle: "solid",
-    fontStyle: "italic"
-  },
-  description: {
-    textAlign: "justify",
-    color: "#190033",
-    fontSize: 18
-  }
-});
