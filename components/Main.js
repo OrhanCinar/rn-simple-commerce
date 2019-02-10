@@ -1,32 +1,47 @@
 import React from "react";
-import { View, Text, Image, ListView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ListView,
+  ScrollView,
+  Button,
+  TouchableOpacity
+} from "react-native";
 import styles from "./styles/Main.style";
 class Main extends React.Component {
   state = {};
   static navigationOptions = {
-    title: "Products"
+    title: "Best Sellers"
   };
 
   render() {
     return (
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Most Selling Products</Text>
-
+        {/* <Text style={styles.headerText}>Most Selling Products</Text> */}
         <ScrollView>
           <View style={styles.container}>
-            <View style={styles.productContainer}>
-              <Image
-                source={require("../assets/Products/Images/32740307068_01.jpg")}
-                style={styles.productImage}
-              />
-              <View style={styles.productTextContainer}>
-                <Text style={styles.productHeader}>Sandisk 64gb SdCard</Text>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.push("Product", {
+                  itemId: Math.floor(Math.random() * 100)
+                })
+              }
+            >
+              <View style={styles.productContainer}>
+                <Image
+                  source={require("../assets/Products/Images/32740307068_01.jpg")}
+                  style={styles.productImage}
+                />
+                <View style={styles.productTextContainer}>
+                  <Text style={styles.productHeader}>Sandisk 64gb SdCard</Text>
+                </View>
+                <View style={styles.priceContainer}>
+                  <Text style={styles.oldPrice}>12.00</Text>
+                  <Text style={styles.price}>10.00</Text>
+                </View>
               </View>
-              <View style={styles.priceContainer}>
-                <Text style={styles.oldPrice}>12.00</Text>
-                <Text style={styles.price}>10.00</Text>
-              </View>
-            </View>
+            </TouchableOpacity>
             <View style={styles.productContainer}>
               <Image
                 source={require("../assets/Products/Images/32880261657_01.jpg")}
@@ -81,6 +96,16 @@ class Main extends React.Component {
                 <Text style={styles.oldPrice}>19.00</Text>
                 <Text style={styles.price}>14.25</Text>
               </View>
+            </View>
+            <View>
+              <Button
+                onPress={() =>
+                  this.props.navigation.push("Login", {
+                    itemId: Math.floor(Math.random() * 100)
+                  })
+                }
+                title="Click"
+              />
             </View>
           </View>
         </ScrollView>
