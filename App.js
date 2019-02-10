@@ -14,49 +14,60 @@ import {
 import Login from "./components/Login";
 import Main from "./components/Main";
 import Product from "./components/Product";
-const AppContainer = createAppContainer(AppNavigator);
+import Category from "./components/Category";
+import Cart from "./components/Cart";
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
   }
 
   static navigationOptions = {
-    title: 'Home',
+    title: "Home"
   };
-
+  static navigationOptions = {
+    drawerLabel: "Home"
+  };
   render() {
-
-     {/* return <AppContainer />; */}
+    {
+      /* return <AppContainer />; */
+    }
 
     return (
       <View style={styles.container}>
         <Login />
         {/* <Main /> */}
         {/* <Product /> */}
-        
-       
       </View>
     );
   }
 }
 
-
-
 const AppNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
-    Category: CategoryScreen,
-    PRoduct: ProductScreen,
-    Cart: CartScreen
+    Home: Main,
+    Category: Category,
+    Product: Product,
+    Cart: Cart,
+    Login: Login
   },
   {
     initialRouteName: "Home"
   }
+  // {
+  //   headerMode: "float",
+  //   Notifications: {
+  //     screen: Main
+  //   },
+  //   navigationOptions: ({ navigator }) => ({
+  //     headerStyle: { backgroundColor: "#4C3E54" },
+  //     title: "Welcome",
+  //     headerTintColor: "white"
+  //   })
+  // }
 );
 
-export default AppNavigator;
-
+export default createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({
   container: {
