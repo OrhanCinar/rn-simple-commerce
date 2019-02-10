@@ -6,9 +6,9 @@ export default (styles = StyleSheet.create({
     //backgroundColor: "#fff",
     flexWrap: "wrap",
     flexDirection: "column",
-    marginTop: 40,
-    marginLeft: 5,
-    marginRight: 5,
+    // marginTop: 40,
+    //marginLeft: 5,
+    //marginRight: 5,
     justifyContent: "space-between"
   },
   inputContainer: {
