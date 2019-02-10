@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, Button, ScrollView } from "react-native";
 
 import styles from "./styles/Cart.style";
 
-class Cart extends Component {
+class Cart extends React.Component {
   state = {};
   render() {
     return (
