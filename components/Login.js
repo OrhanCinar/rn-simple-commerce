@@ -20,7 +20,7 @@ class Login extends React.Component {
       <ImageBackground
         source={require("../assets/Background/7925b06244744a123a371edb91863c4d.jpg")}
         style={{
-          backgroundColor: "#fc0",
+          //backgroundColor: "#fc0",
           width: "100%", // applied to Image
           height: "100%"
         }}
