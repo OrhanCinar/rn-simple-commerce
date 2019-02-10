@@ -12,6 +12,9 @@ import styles from "./styles/Product.style";
 
 class Product extends React.Component {
   state = {};
+  static navigationOptions = {
+    title: "Sandisk 64gb SdCard"
+  };
 
   btnAddToCartHandle() {
     Alert.alert("Add To Cart");
@@ -20,9 +23,9 @@ class Product extends React.Component {
   render() {
     return (
       <ImageBackground
-        source={require("../assets/Background/0de5ab56265287a9b09e06d1ee103022.jpg")}
+        //source={require("../assets/Background/0de5ab56265287a9b09e06d1ee103022.jpg")}
         style={{
-          backgroundColor: "#fc0",
+          backgroundColor: "#B2EBF2",
           width: "100%", // applied to Image
           height: "100%"
         }}
@@ -31,7 +34,7 @@ class Product extends React.Component {
         }}
       >
         <View style={styles.container}>
-          <View>
+          <View style={styles.headerContainer}>
             <Text style={styles.productHeader}>Sandisk 64gb SdCard</Text>
           </View>
 
