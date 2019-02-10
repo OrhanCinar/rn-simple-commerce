@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default (styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#E0F7FA",
     flexWrap: "wrap",
     flexDirection: "row",
     marginLeft: 2,
@@ -15,7 +15,7 @@ export default (styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 0.9,
-    borderColor: "#FF99CC"
+    borderColor: "#00BCD4"
   },
   productImage: {
     justifyContent: "space-between",
