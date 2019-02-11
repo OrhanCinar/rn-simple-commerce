@@ -5,11 +5,14 @@ import styles from "./styles/Cart.style";
 
 class Cart extends React.Component {
   state = {};
+  static navigationOptions = {
+    title: "Cart"
+  };
   render() {
     return (
       <View>
         <ScrollView>
-          <View>
+          <View style={styles.productContainer}>
             <Image
               id="32740307068"
               accessibilityLabel="product Image"
@@ -25,11 +28,11 @@ class Cart extends React.Component {
             </View>
             <Text>5</Text>
             <Text>50.00</Text>
-            <Button>REMOVE ITEM</Button>
+            <Button title="REMOVE ITEM" />
           </View>
         </ScrollView>
 
-        <View>
+        <View style={styles.totalsContainer}>
           <Text>TOTAL : 50.00</Text>
           <Text>DISCOUNT : 0.00</Text>
           <Text>SUB TOTAL : 50.00</Text>
