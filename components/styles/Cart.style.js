@@ -11,6 +11,12 @@ export default (styles = StyleSheet.create({
     marginRight: 5,
     justifyContent: "space-between"
   },
+  productContainer: {
+    flex: 1
+  },
+  totalsContainer: {
+    flex: 1
+  },
   productItem: {
     //marginBottom: 10,
     width: 200,
