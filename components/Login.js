@@ -33,12 +33,12 @@ class Login extends React.Component {
             <TextInput placeholder="Username" style={styles.inputs} />
             <TextInput placeholder="Password" style={styles.inputs} />
           </View>
-          {/* 
+
           <TouchableOpacity
             style={{ height: 100, marginTop: 10, color: "#fff" }}
           >
             <Text>LOGIN</Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     );
