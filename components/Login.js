@@ -36,6 +36,11 @@ class Login extends React.Component {
 
           <TouchableOpacity
             style={{ height: 100, marginTop: 10, color: "#fff" }}
+            onPress={() =>
+              this.props.navigation.push("Product", {
+                itemId: Math.floor(Math.random() * 100)
+              })
+            }
           >
             <Text>LOGIN</Text>
           </TouchableOpacity>
