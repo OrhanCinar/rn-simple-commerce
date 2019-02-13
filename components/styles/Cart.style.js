@@ -4,23 +4,47 @@ export default (styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: "#fff",
-    flexWrap: "wrap",
+    //    flexWrap: "wrap",
     flexDirection: "column",
-    marginTop: 40,
+    //marginTop: 40,
     marginLeft: 5,
     marginRight: 5,
-    justifyContent: "space-between"
+    marginRight: 5
+    //justifyContent: "space-between"
   },
   productContainer: {
-    flex: 1
+    flex: 1,
+    marginLeft: 5,
+    marginTop: 10,
+    flexDirection: "row",
+    alignSelf: "stretch",
+    width: "100%"
   },
   totalsContainer: {
-    flex: 1
+    flex: 1,
+    borderWidth: 0.9,
+    borderColor: "#202020",
+    height: 50,
+    textAlign: "right",
+    width: "100%"
+    // alignSelf: "flex-end"
   },
   productItem: {
     //marginBottom: 10,
-    width: 200,
-    height: 200
+    width: 100,
+    height: 100,
+    borderWidth: 0.9,
+    borderColor: "#202020"
+  },
+  productInfoContainer: {
+    borderWidth: 0.9,
+    borderColor: "#202020",
+    alignSelf: "stretch",
+    width: "73%"
+  },
+  productPriceTotals: {
+    textAlign: "left",
+    color: "black"
   },
   imageContainer: {
     justifyContent: "center",
@@ -31,21 +55,24 @@ export default (styles = StyleSheet.create({
     marginBottom: 5
   },
   productHeader: {
-    fontSize: 30,
-    fontWeight: "bold"
+    fontSize: 14,
+    fontWeight: "bold",
+    marginLeft: 10
   },
 
   priceContainer: {
-    alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   price: {
-    fontSize: 30,
+    fontSize: 14,
     fontWeight: "bold",
-    color: "green"
+    color: "green",
+    textAlign: "right",
+    alignSelf: "flex-end"
   },
   oldPrice: {
-    fontSize: 25,
+    fontSize: 10,
     fontWeight: "bold",
     color: "red",
     textDecorationLine: "line-through",
