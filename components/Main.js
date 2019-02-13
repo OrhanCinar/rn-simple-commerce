@@ -100,7 +100,7 @@ class Main extends React.Component {
             <View>
               <Button
                 onPress={() =>
-                  this.props.navigation.push("Category", {
+                  this.props.navigation.push("Cart", {
                     itemId: Math.floor(Math.random() * 100)
                   })
                 }
