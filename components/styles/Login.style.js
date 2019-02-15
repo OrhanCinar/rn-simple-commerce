@@ -9,7 +9,9 @@ export default (styles = StyleSheet.create({
     // marginTop: 40,
     //marginLeft: 5,
     //marginRight: 5,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    justifyContent: "center",
+    alignItems: "center"
   },
   inputContainer: {
     flex: 1,
@@ -27,6 +29,22 @@ export default (styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     color: "#fff",
+    textAlign: "center",
+    fontSize: 24
+  },
+  buttonContainer: {
+    height: 60,
+    //marginTop: 40,
+    marginBottom: 10,
+    width: 240,
+    borderRadius: 8,
+    borderWidth: 0.9,
+    borderColor: "#7da8e8",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonText: {
+    color: "#b5c5dd",
     textAlign: "center",
     fontSize: 24
   }

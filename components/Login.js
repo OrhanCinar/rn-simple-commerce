@@ -11,6 +11,11 @@ import {
 import styles from "./styles/Login.style";
 class Login extends React.Component {
   state = {};
+
+  static navigationOptions = {
+    title: "Login"
+  };
+
   onLogin() {
     this.props.navigation.navigate("Main", { id: 0 });
   }
@@ -22,11 +27,12 @@ class Login extends React.Component {
         style={{
           //backgroundColor: "#fc0",
           width: "100%", // applied to Image
-          height: "100%"
+          height: "100%",
+          flexWrap: "wrap"
         }}
-        imageStyle={{
-          resizeMode: "contain" // works only here!
-        }}
+        // imageStyle={{
+        //   resizeMode: "contain" // works only here!
+        // }}
       >
         <View style={styles.container}>
           <View style={styles.inputContainer}>
@@ -34,16 +40,17 @@ class Login extends React.Component {
             <TextInput placeholder="Password" style={styles.inputs} />
           </View>
 
-          <TouchableOpacity
-            style={{ height: 100, marginTop: 10, color: "#fff" }}
-            onPress={() =>
-              this.props.navigation.push("Product", {
-                itemId: Math.floor(Math.random() * 100)
-              })
-            }
-          >
-            <Text>LOGIN</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.push("Product", {
+                  itemId: Math.floor(Math.random() * 100)
+                })
+              }
+            >
+              <Text style={styles.buttonText}>LOGIN</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     );
