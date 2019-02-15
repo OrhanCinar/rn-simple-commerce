@@ -104,7 +104,15 @@ class Main extends React.Component {
                     itemId: Math.floor(Math.random() * 100)
                   })
                 }
-                title="Click"
+                title="Cart"
+              />
+              <Button
+                onPress={() =>
+                  this.props.navigation.push("Login", {
+                    itemId: Math.floor(Math.random() * 100)
+                  })
+                }
+                title="Login"
               />
             </View>
           </View>
