@@ -3,30 +3,12 @@ import { StyleSheet } from "react-native";
 export default (styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: "#fff",
-    flexWrap: "wrap",
     flexDirection: "column",
-    marginTop: 40,
-    //marginLeft: 5,
-    //marginRight: 5,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    backgroundColor: "#f4f4f4"
   },
-  productItem: {
-    //marginBottom: 10,
-    width: 200,
-    height: 200
-  },
-  imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    // borderRadius: 8,
-    // borderWidth: 0.9,
-    borderColor: "#202020",
-    marginBottom: 5,
-    borderBottomColor: "black",
-    borderBottomWidth: 1,
-    marginBottom: 1
-  },
+
+  //header
   headerContainer: {
     justifyContent: "center",
     alignItems: "center",
@@ -36,32 +18,49 @@ export default (styles = StyleSheet.create({
   },
   productHeader: {
     fontSize: 30,
-    //fontWeight: "bold",
     textShadowColor: "rgba(0, 0, 0, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10
+    textShadowRadius: 6
   },
-  btnAdd: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#841584",
-    height: 36,
-    marginBottom: 5
+
+  //Image
+  imageContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    // borderRadius: 8,
+    // borderWidth: 0.9,
+    borderColor: "#202020",
+    borderBottomColor: "black",
+    borderBottomWidth: 1
   },
+
+  productImage: {
+    //marginBottom: 10,
+    width: 200,
+    height: 200,
+    marginBottom: 5,
+    marginTop: 5
+  },
+
+  //PRICE
   priceContainer: {
     alignItems: "center",
+    textAlign: "center",
     justifyContent: "center",
     borderBottomColor: "black",
     borderBottomWidth: 1,
-    marginBottom: 1
+    marginBottom: 1,
+    flexShrink: 1
   },
   price: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "green"
+    color: "green",
+    flex: 0,
+    margin: 2
   },
   oldPrice: {
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: "bold",
     color: "red",
     textDecorationLine: "line-through",
@@ -71,6 +70,19 @@ export default (styles = StyleSheet.create({
   description: {
     textAlign: "justify",
     color: "#190033",
-    fontSize: 18
+    fontSize: 16
+  },
+
+  //button
+  buttonContainer: {
+    height: 60,
+    margin: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#841584"
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 22
   }
 }));

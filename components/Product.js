@@ -6,7 +6,8 @@ import {
   Image,
   Button,
   Alert,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity
 } from "react-native";
 import styles from "./styles/Product.style";
 
@@ -43,7 +44,7 @@ class Product extends React.Component {
             id="32740307068"
             accessibilityLabel="product Image"
             source={require("../assets/Products/Images/32740307068_01.jpg")}
-            style={styles.productItem}
+            style={styles.productImage}
           />
         </View>
 
@@ -53,19 +54,21 @@ class Product extends React.Component {
         </View>
         {/* ADD SPINNER FOR QUANTITY */}
         {/* <Image accessibilityLabel="favorite" /> */}
-        <Text style={styles.description}>
-          La vie merveilleuse, le disque est à vous Carte mémoire SanDisk haute
-          vitesse mobile micro SDXC UHS-I Résistant au froid et à la chaleur,
-          résistant aux rayons X, résistant aux chocs, étanche, anti-magnétique
-          Découvrez des photos de qualité supérieure, une capture vidéo full HD
-          et des applications d'application plus rapides
-        </Text>
+        <View>
+          <Text style={styles.description}>
+            La vie merveilleuse, le disque est à vous Carte mémoire SanDisk
+            haute vitesse mobile micro SDXC UHS-I Résistant au froid et à la
+            chaleur, résistant aux rayons X, résistant aux chocs, étanche,
+            anti-magnétique Découvrez des photos de qualité supérieure, une
+            capture vidéo full HD et des applications d'application plus rapides
+          </Text>
+        </View>
 
-        <Button
-          color="#841584"
-          title="ADD TO CART"
-          onPress={this.btnAddToCartHandle}
-        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={this.btnAddToCartHandle}>
+            <Text style={styles.buttonText}>ADD TO CART</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       // </ImageBackground>
     );
