@@ -1,5 +1,10 @@
 import React from "react";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {
+  createStackNavigator,
+  createAppContainer,
+  createBottomTabNavigator,
+  createDrawerNavigator
+} from "react-navigation";
 
 import {
   StyleSheet,
@@ -43,31 +48,44 @@ class App extends React.Component {
   }
 }
 
-const AppNavigator = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: Main,
-    Category: Category,
-    Product: Product,
-    Cart: Cart,
-    Login: Login
+    Category: Category
   },
   {
     initialRouteName: "Home"
   }
-  // {
-  //   headerMode: "float",
-  //   Notifications: {
-  //     screen: Main
-  //   },
-  //   navigationOptions: ({ navigator }) => ({
-  //     headerStyle: { backgroundColor: "#4C3E54" },
-  //     title: "Welcome",
-  //     headerTintColor: "white"
-  //   })
-  // }
 );
 
-export default createAppContainer(AppNavigator);
+const CategoryStack = createStackNavigator({
+  Category: Category
+});
+
+const CartStack = createStackNavigator({
+  Cart: Cart
+});
+
+const Drawer = createDrawerNavigator(
+  {
+    Home: Main,
+    Category: Category
+  },
+  {
+    navigationOptions: {
+      drawerLockMode: "locked-closed"
+    },
+    backBehavior: "none"
+  }
+);
+
+export default createAppContainer(
+  createBottomTabNavigator({
+    Home: HomeStack,
+    Category: CategoryStack,
+    Cart: CartStack
+  })
+);
 
 const styles = StyleSheet.create({
   container: {
