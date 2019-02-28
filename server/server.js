@@ -1,17 +1,25 @@
-var createError = require("http-errors");
+const createError = require("http-errors");
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+
 const app = express();
 const port = 5000;
 
+const indexRouter = require("./routes/index");
+
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
+app.get("/", indexRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
