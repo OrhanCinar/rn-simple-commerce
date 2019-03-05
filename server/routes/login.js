@@ -1,17 +1,29 @@
 var express = require("express");
 var router = express.Router();
-var MongoClient = require("mongodb").MongoClient;
+import { getClient } from "../config/mymongo";
 
 router.post("/login", function(req, res, next) {
-  res.send({
-    data: {}
-  });
+  const client = getClient();
+
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      const db = getDb();
+      const user = db.collection("user");
+    });
+  } catch (error) {}
+  client.close();
 });
 
 router.post("/register", function(req, res, next) {
-  res.send({
-    data: {}
-  });
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      const db = getDb();
+      const user = db.collection("user").insertOne();
+    });
+  } catch (error) {}
+  client.close();
 });
 
 module.exports = router;

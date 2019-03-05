@@ -1,4 +1,4 @@
-import { getDb, getClient } from "../config/mymongo";
+import { getClient } from "../config/mymongo";
 
 var express = require("express");
 var router = express.Router();

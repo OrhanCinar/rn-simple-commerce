@@ -21,6 +21,7 @@ router.post("/addProduct", (req, res) => {
       });
     });
   } catch (error) {}
+  client.close();
 });
 
 //Insert Banner
@@ -39,6 +40,7 @@ router.post("/addBanner", (req, res) => {
       });
     });
   } catch (error) {}
+  client.close();
 });
 
 module.exports = router;

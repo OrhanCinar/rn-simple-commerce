@@ -1,21 +1,30 @@
 var express = require("express");
 var router = express.Router();
-var MongoClient = require("mongodb").MongoClient;
+import { getClient } from "../config/mymongo";
 
 router.get("/category", function(req, res, next) {
-  res.send({
-    data: {
-      banner: [{ Id: 0, Url: "", Order: 0 }, { Id: 0, Url: "", Order: 0 }],
-      categories: [
-        {
-          Id: 0,
-          Name: "",
-          Url: "",
-          Order: 0
+  var client = getClient();
+
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      const db = getDb();
+      const bannerList = db.collection("banner");
+      const categoryList = db.collection("category");
+      console.log(products);
+
+      res.send({
+        data: {
+          bannerList: bannerList,
+          categoryList: categoryList
         }
-      ]
-    }
-  });
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  client.close();
 });
 
 module.exports = router;

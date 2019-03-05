@@ -29,6 +29,8 @@ router.get("/product:id", function(req, res, next) {
   } catch (error) {
     console.log(error);
   }
+
+  client.close();
 });
 
 module.exports = router;
