@@ -1,21 +1,34 @@
 var express = require("express");
 var router = express.Router();
-var MongoClient = require("mongodb").MongoClient;
+import { getClient } from "../config/mymongo";
 
 router.get("/product:id", function(req, res, next) {
-  res.send({
-    data: {
-      products: {
-        Id: 0,
-        ProductName: "",
-        Url: "",
-        Price: 0,
-        OldPrice: 0,
-        Order: 0,
-        Description
-      }
-    }
-  });
+  const client = getClient();
+
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      const db = getDb();
+      const product = db.collection("product").findOne({ id: req.params.id });
+      console.log(products);
+
+      res.send({
+        data: {
+          products: {
+            Id: 0,
+            ProductName: product.name,
+            Url: product.imageUrl,
+            Price: product.price,
+            OldPrice: product.oldPrice,
+            Order: product.orderId,
+            Description: product.description
+          }
+        }
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

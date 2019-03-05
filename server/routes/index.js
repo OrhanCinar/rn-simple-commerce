@@ -11,8 +11,8 @@ router.get("/", function(req, res, next) {
     client.connect((err, client) => {
       handleConnection(err);
       const db = getDb();
-      const products = db.collection("products");
-      const banners = db.collection("banners");
+      const products = db.collection("product");
+      const banners = db.collection("banner");
       console.log(products);
 
       res.send({
@@ -27,19 +27,6 @@ router.get("/", function(req, res, next) {
   }
 
   client.close();
-});
-
-//Insert Product
-router.post("/addProducts", (req, res) => {
-  const client = getClient();
-
-  try {
-    client.connect((err, client) => {
-      handleConnection(err);
-
-      client.products.insertOne({});
-    });
-  } catch (error) {}
 });
 
 module.exports = router;
