@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-import { getClient } from "../config/mymongo";
+import { getClient, getDb } from "../config/mymongo";
 
 router.post("/login", function(req, res, next) {
   const client = getClient();

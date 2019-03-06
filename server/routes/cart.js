@@ -1,40 +1,67 @@
 var express = require("express");
 var router = express.Router();
-var MongoClient = require("mongodb").MongoClient;
+import { getClient, getDb } from "../config/mymongo";
 
 router.get("/cart", function(req, res, next) {
-  res.send({
-    data: {
-      products: [
-        {
-          Id: 0,
-          ProductName: "",
-          Url: "",
-          Price: 0,
-          OldPrice: 0,
-          Order: 0
+  var client = getClient();
+
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      const db = getDb();
+      const cart = db.collection("cart");
+
+      console.log(products);
+
+      res.send({
+        data: {
+          cart: cart
         }
-      ]
-    }
-  });
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  client.close();
 });
 
 router.post("addToCart", function(req, res, next) {
-  //mongo insert
-  res.send({
-    data: {
-      status: "ok"
-    }
-  });
+  var client = getClient();
+
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      client.product.insertOne({});
+
+      res.send({
+        data: {}
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  client.close();
 });
 
 router.post("removeFromCart", function(req, res, next) {
-  //mongo insert
-  res.send({
-    data: {
-      status: "ok"
-    }
-  });
+  var client = getClient();
+
+  try {
+    client.connect((err, client) => {
+      handleConnection(err);
+      client.product.removeOne({});
+
+      res.send({
+        data: {}
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  client.close();
 });
 
 module.exports = router;
