@@ -8,6 +8,8 @@ const app = express();
 const port = 5000;
 
 const indexRouter = require("./routes/index");
+const productRouter = require("./routes/product");
+const cartRouter = require("./routes/cart");
 
 const corsOptions = {
   origin: "*",
@@ -19,6 +21,8 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get("/product/:id", productRouter);
+app.get("/cart", cartRouter);
 app.get("/", indexRouter);
 
 app.use(function(req, res, next) {
