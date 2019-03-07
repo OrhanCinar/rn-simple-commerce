@@ -1,37 +1,35 @@
 var express = require("express");
 var router = express.Router();
-import { getClient, getDb } from "../config/mymongo";
+var myMongo = require("../config/mymongo");
 
 router.get("/cart", function(req, res, next) {
-  var client = getClient();
+  console.log("cart route hit");
 
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
-      const db = getDb();
-      const cart = db.collection("cart");
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
+      const cartProducts = db.collection("cart");
 
-      console.log(products);
-
+      client.close();
       res.send({
         data: {
-          cart: cart
+          cart: cartProducts
         }
       });
     });
   } catch (error) {
     console.log(error);
   }
-
-  client.close();
 });
 
 router.post("addToCart", function(req, res, next) {
-  var client = getClient();
-
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
       client.product.insertOne({});
 
       res.send({
@@ -46,11 +44,10 @@ router.post("addToCart", function(req, res, next) {
 });
 
 router.post("removeFromCart", function(req, res, next) {
-  var client = getClient();
-
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
+      myMongo.handleConnection(err);
       client.product.removeOne({});
 
       res.send({

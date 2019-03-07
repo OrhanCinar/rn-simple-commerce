@@ -1,18 +1,16 @@
 var express = require("express");
 var router = express.Router();
-import { getClient, getDb } from "../config/mymongo";
+var myMongo = require("../config/mymongo");
 
 router.get("/category", function(req, res, next) {
-  var client = getClient();
-
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
-      const db = getDb();
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
       const bannerList = db.collection("banner");
       const categoryList = db.collection("category");
-      console.log(products);
-
+      client.close();
       res.send({
         data: {
           bannerList: bannerList,
@@ -23,8 +21,6 @@ router.get("/category", function(req, res, next) {
   } catch (error) {
     console.log(error);
   }
-
-  client.close();
 });
 
 module.exports = router;

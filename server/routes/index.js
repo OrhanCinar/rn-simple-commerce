@@ -1,20 +1,20 @@
-const { getClient, getDb, handleConnection } = require("../config/mymongo");
+var myMongo = require("../config/mymongo");
 var express = require("express");
 var router = express.Router();
 
 //List Index
 router.get("/", function(req, res, next) {
-  //console.log(req);
-  var client = getClient();
-
+  console.log("index route hit");
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
-      const db = getDb();
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
+
       const products = db.collection("product");
       const banners = db.collection("banner");
-      console.log(products);
-
+      client.close();
+      //console.log("products", products);
       res.send({
         data: {
           banner: banners,
@@ -24,9 +24,8 @@ router.get("/", function(req, res, next) {
     });
   } catch (error) {
     console.log(error);
+    req.send("ERROR");
   }
-
-  client.close();
 });
 
 module.exports = router;

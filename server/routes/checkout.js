@@ -1,16 +1,16 @@
 var express = require("express");
 var router = express.Router();
-import { getClient, getDb } from "../config/mymongo";
+var myMongo = require("../config/mymongo");
 
 router.get("/checkout", function(req, res, next) {
-  const client = getClient();
-
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
-      const db = getDb();
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
       const products = db.collection("product");
-      console.log(products);
+
+      client.close();
       //should change as list
       res.send({
         data: {
@@ -29,8 +29,6 @@ router.get("/checkout", function(req, res, next) {
   } catch (error) {
     console.log(error);
   }
-
-  client.close();
 });
 
 module.exports = router;

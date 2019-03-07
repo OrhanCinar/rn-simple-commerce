@@ -1,16 +1,17 @@
 var express = require("express");
 var router = express.Router();
-import { getClient, getDb } from "../config/mymongo";
+var myMongo = require("../config/mymongo");
 
-router.get("/product:id", function(req, res, next) {
-  const client = getClient();
-
+router.get("/product/:id", function(req, res, next) {
+  console.log("product route hit");
   try {
+    var client = myMongo.getClient();
     client.connect((err, client) => {
-      handleConnection(err);
-      const db = getDb();
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
+
       const product = db.collection("product").findOne({ id: req.params.id });
-      console.log(products);
+      console.log(product);
 
       res.send({
         data: {
