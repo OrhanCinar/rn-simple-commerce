@@ -1,8 +1,10 @@
-const config = require("./config");
-
+var myMongo = {};
 var MongoClient = require("mongodb").MongoClient;
 
-const handleConnection = err => {
+const baseUrl = "mongodb://localhost:27017/simplecommerce";
+const dbName = "simplecommerce";
+
+myMongo.handleConnection = err => {
   if (err) {
     console.log("mongo err", err);
     throw new Error("mongo not connected");
@@ -11,15 +13,18 @@ const handleConnection = err => {
   }
 };
 
-const getClient = () => {
-  return new MongoClient(config.baseUrl);
+myMongo.getClient = () => {
+  return new MongoClient(baseUrl, { useNewUrlParser: true });
 };
 
-const getDb = () => {
-  return getClient()
-    .connect()
-    .then(t => t.db(config.dbName))
-    .catch(c => console.log(c));
-};
+// myMongo.getDb = () => {
+//   return new MongoClient(this.baseUrl)
+//     .connect()
+//     .then(t => t.db(this.dbName))
+//     .catch(c => console.log(c));
+// };
 
-module.exports = { handleConnection, getClient, getDb };
+myMongo.baseUrl = baseUrl;
+myMongo.dbName = dbName;
+
+module.exports = myMongo;
