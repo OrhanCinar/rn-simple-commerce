@@ -1,1 +1,1 @@
-React Native Simple E-Commerce App
+React Native Simple E-Commerce App (On Going)
