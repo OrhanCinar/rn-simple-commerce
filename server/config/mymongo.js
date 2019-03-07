@@ -1,21 +1,25 @@
-import { baseUrl, dbName } from "../config/config";
+const config = require("./config");
 
 var MongoClient = require("mongodb").MongoClient;
 
-function handleConnection(err) {
+const handleConnection = err => {
   if (err) {
-    console.log(err);
+    console.log("mongo err", err);
+    throw new Error("mongo not connected");
   } else {
-    console.log("connected");
+    console.log("mongo connected");
   }
-}
+};
 
-function getClient() {
-  return new MongoClient(baseUrl);
-}
+const getClient = () => {
+  return new MongoClient(config.baseUrl);
+};
 
-function getDb() {
-  return client.db(dbName);
-}
+const getDb = () => {
+  return getClient()
+    .connect()
+    .then(t => t.db(config.dbName))
+    .catch(c => console.log(c));
+};
 
-export { handleConnection, getClient, getDb };
+module.exports = { handleConnection, getClient, getDb };

@@ -1,10 +1,10 @@
-import { getClient, getDb } from "../config/mymongo";
-
+const { getClient, getDb, handleConnection } = require("../config/mymongo");
 var express = require("express");
 var router = express.Router();
 
 //List Index
 router.get("/", function(req, res, next) {
+  //console.log(req);
   var client = getClient();
 
   try {
