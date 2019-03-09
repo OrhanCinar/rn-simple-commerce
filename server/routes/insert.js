@@ -20,7 +20,9 @@ router.post("/addProduct", (req, res) => {
         orderId: 1
       });
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error: "Internal Error!" });
+  }
   client.close();
 });
 
@@ -39,7 +41,9 @@ router.post("/addBanner", (req, res) => {
         orderId: 1
       });
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error: "Internal Error!" });
+  }
   client.close();
 });
 

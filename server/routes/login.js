@@ -11,7 +11,9 @@ router.post("/login", function(req, res, next) {
       const user = db.collection("user");
       client.close();
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error: "Internal Error!" });
+  }
 });
 
 router.post("/register", function(req, res, next) {
@@ -23,7 +25,9 @@ router.post("/register", function(req, res, next) {
       const user = db.collection("user").insertOne();
       client.close();
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error: "Internal Error!" });
+  }
 });
 
 module.exports = router;

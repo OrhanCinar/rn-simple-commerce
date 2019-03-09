@@ -23,7 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/product/:id", productRouter);
 app.get("/cart", cartRouter);
-app.get("/", indexRouter);
+app.get("/products", indexRouter);
+app.get("/banners", indexRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

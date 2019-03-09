@@ -13,14 +13,14 @@ router.get("/cart", function(req, res, next) {
       const cartProducts = db.collection("cart");
 
       client.close();
-      res.send({
+      res.json({
         data: {
           cart: cartProducts
         }
       });
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: "Internal Error!" });
   }
 });
 
@@ -37,7 +37,7 @@ router.post("addToCart", function(req, res, next) {
       });
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: "Internal Error!" });
   }
 
   client.close();
