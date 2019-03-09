@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var myMongo = require("../config/mymongo");
+var ObjectId = require("mongodb").ObjectId;
+const cdnPath = "http://localhost:5000/assets/Products/Images/";
 
 router.get("/product/:id", function(req, res, next) {
   console.log("product route hit");
@@ -9,29 +11,34 @@ router.get("/product/:id", function(req, res, next) {
     client.connect((err, client) => {
       myMongo.handleConnection(err);
       const db = client.db(myMongo.dbName);
+      //console.log("id", req.params);
+      db.collection("product").findOne(
+        { _id: ObjectId(req.params.id) },
+        function(err, product) {
+          if (err) {
+            res.jsonp(err);
+          }
 
-      const product = db.collection("product").findOne({ id: req.params.id });
-      console.log(product);
-
-      res.send({
-        data: {
-          products: {
-            Id: 0,
-            ProductName: product.name,
-            Url: product.imageUrl,
-            Price: product.price,
-            OldPrice: product.oldPrice,
-            Order: product.orderId,
-            Description: product.description
+          if (product) {
+            //console.log(result);
+            product.imageUrl = cdnPath.concat(product.imageUrl);
+            res.jsonp({
+              data: {
+                product: product
+              }
+            });
+          } else {
+            res.jsonp({
+              status: "No Product"
+            });
           }
         }
-      });
+      );
     });
+    client.close();
   } catch (error) {
-    console.log(error);
+    res.jsonp(err);
   }
-
-  client.close();
 });
 
 module.exports = router;
