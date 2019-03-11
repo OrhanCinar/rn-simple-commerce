@@ -9,11 +9,33 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Main.style";
+
+const PRODUCTS_URL = "http://localhost:5000/products";
+const BANNERS_URL = "http://localhost:5000/banners";
+
 class Main extends React.Component {
   state = {};
   static navigationOptions = {
     title: "Best Sellers"
   };
+
+  componentDidMount() {
+    fetch(PRODUCTS_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.state.products = JSON.stringify(json);
+      });
+
+    fetch(BANNERS_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.state.banners = JSON.stringify(json);
+      });
+  }
 
   render() {
     return (
