@@ -58,6 +58,10 @@ const HomeStack = createStackNavigator(
   }
 );
 
+const ProductStack = createStackNavigator({
+  Product: Product
+});
+
 const CategoryStack = createStackNavigator({
   Category: Category
 });
@@ -83,7 +87,8 @@ export default createAppContainer(
   createBottomTabNavigator({
     Home: HomeStack,
     Category: CategoryStack,
-    Cart: CartStack
+    Cart: CartStack,
+    Product: ProductStack
   })
 );
 
