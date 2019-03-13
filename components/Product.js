@@ -10,9 +10,11 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Product.style";
-
+const PRODUCT_URL = "http://192.168.1.22:5000/product";
 class Product extends React.Component {
-  state = {};
+  state = {
+    product = {}
+  };
   static navigationOptions = {
     title: "Sandisk 64gb SdCard"
   };
@@ -21,7 +23,29 @@ class Product extends React.Component {
     Alert.alert("Add To Cart");
   }
 
+  componentDidMount() {
+
+    const { navigation } = this.props;
+    const itemId = navigation.getParam('itemId', '0');
+
+    fetch(PRODUCT_URL + "?id" + itemId)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          product: json.data.product
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+      console.log(this.state.product);
+  }
+
   render() {
+    const {product} = this.state;
     return (
       // <ImageBackground
       //   //source={require("../assets/Background/0de5ab56265287a9b09e06d1ee103022.jpg")}
@@ -34,33 +58,30 @@ class Product extends React.Component {
       //     resizeMode: "contain" // works only here!
       //   }}
       // >
+      
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text style={styles.productHeader}>Sandisk 64gb SdCard</Text>
+          <Text style={styles.productHeader}>{product.name}</Text>
         </View>
 
         <View style={styles.imageContainer}>
           <Image
-            id="32740307068"
+            id={product._id}
             accessibilityLabel="product Image"
-            source={require("../assets/Products/Images/32740307068_01.jpg")}
+            source={{uri : product.imageUrl}}
             style={styles.productImage}
           />
         </View>
 
         <View style={styles.priceContainer}>
-          <Text style={styles.oldPrice}>12.00</Text>
-          <Text style={styles.price}>10.00</Text>
+          <Text style={styles.oldPrice}>{product.oldPrice}</Text>
+          <Text style={styles.price}>{product.price}</Text>
         </View>
         {/* ADD SPINNER FOR QUANTITY */}
         {/* <Image accessibilityLabel="favorite" /> */}
         <View>
           <Text style={styles.description}>
-            La vie merveilleuse, le disque est à vous Carte mémoire SanDisk
-            haute vitesse mobile micro SDXC UHS-I Résistant au froid et à la
-            chaleur, résistant aux rayons X, résistant aux chocs, étanche,
-            anti-magnétique Découvrez des photos de qualité supérieure, une
-            capture vidéo full HD et des applications d'application plus rapides
+           {product.description}
           </Text>
         </View>
 
