@@ -17,9 +17,9 @@ router.get("/products", function(req, res, next) {
           res.jsonp(err);
         }
 
-        if (result.length) {
+        if (result.length > 0) {
           result.forEach(item => {
-            console.log(item.imageUrl);
+            //console.log(item.imageUrl);
             item.imageUrl = cdnPath.concat(item.imageUrl);
           });
 
@@ -29,6 +29,7 @@ router.get("/products", function(req, res, next) {
             }
           });
         }
+        //add else condition
       });
 
       client.close();
@@ -53,7 +54,7 @@ router.get("/banners", function(req, res, next) {
           res.jsonp(err);
         }
 
-        if (result.length) {
+        if (result.length > 0) {
           result.forEach(item => {
             item.imageUrl = cdnPath.concat(item.imageUrl);
           });
@@ -64,6 +65,7 @@ router.get("/banners", function(req, res, next) {
             }
           });
         }
+        //add else condition
       });
 
       client.close();
