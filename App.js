@@ -78,8 +78,8 @@ const Drawer = createDrawerNavigator(
   {
     navigationOptions: {
       drawerLockMode: "locked-closed"
-    },
-    backBehavior: "none"
+    }
+    //backBehavior: "none"
   }
 );
 
