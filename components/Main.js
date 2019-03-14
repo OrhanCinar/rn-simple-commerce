@@ -69,7 +69,8 @@ class Main extends React.Component {
               <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.push("Product", {
-                    itemId: item._id
+                    itemId: item._id,
+                    title: item.name
                   })
                 }
                 key={item._id}
