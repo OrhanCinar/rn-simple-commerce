@@ -10,13 +10,23 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Product.style";
-const PRODUCT_URL = "http://192.168.1.22:5000/product";
+const PRODUCT_URL = "http://192.168.1.22:5000/product/";
 class Product extends React.Component {
   state = {
-    product = {}
+    product: {},
+    title: ""
   };
-  static navigationOptions = {
-    title: "Sandisk 64gb SdCard"
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam("title", "Go Back")
+      // headerLeft: (
+      //   <Button
+      //     onPress={() => navigation.popToTop()}
+      //     title="Info"
+      //     color="#fff"
+      //   />
+      // )
+    };
   };
 
   btnAddToCartHandle() {
@@ -24,41 +34,42 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-
     const { navigation } = this.props;
-    const itemId = navigation.getParam('itemId', '0');
+    console.log("product detail page loaded");
+    const itemId = navigation.getParam("itemId", "0");
 
-    fetch(PRODUCT_URL + "?id" + itemId)
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          product: json.data.product
+    console.log("itemId", itemId);
+    if (itemId !== "0") {
+      console.log("itemId", PRODUCT_URL + itemId);
+      fetch(PRODUCT_URL + itemId)
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          this.setState({
+            product: json.data.product,
+            title: json.data.product.title
+          });
+        })
+        .catch(e => {
+          console.log(e);
         });
-      })
-      .catch(e => {
-        console.log(e);
-      });
 
-      console.log(this.state.product);
+      // console.log(this.state.product);
+    }
   }
 
   render() {
-    const {product} = this.state;
+    const { product } = this.state;
+    const { navigation } = this.props;
+    const itemId = navigation.getParam("itemId", "0");
+
+    console.log("itemId", itemId);
+    // if (!product) {
+    //   return "No Product";
+    // }
+
     return (
-      // <ImageBackground
-      //   //source={require("../assets/Background/0de5ab56265287a9b09e06d1ee103022.jpg")}
-      //   style={{
-      //     backgroundColor: "#B2EBF2",
-      //     width: "100%", // applied to Image
-      //     height: "100%"
-      //   }}
-      //   imageStyle={{
-      //     resizeMode: "contain" // works only here!
-      //   }}
-      // >
-      
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.productHeader}>{product.name}</Text>
@@ -68,7 +79,7 @@ class Product extends React.Component {
           <Image
             id={product._id}
             accessibilityLabel="product Image"
-            source={{uri : product.imageUrl}}
+            source={{ uri: product.imageUrl }}
             style={styles.productImage}
           />
         </View>
@@ -80,9 +91,7 @@ class Product extends React.Component {
         {/* ADD SPINNER FOR QUANTITY */}
         {/* <Image accessibilityLabel="favorite" /> */}
         <View>
-          <Text style={styles.description}>
-           {product.description}
-          </Text>
+          <Text style={styles.description}>{product.description}</Text>
         </View>
 
         <View style={styles.buttonContainer}>
