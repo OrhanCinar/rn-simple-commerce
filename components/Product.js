@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import styles from "./styles/Product.style";
 const PRODUCT_URL = "http://192.168.1.22:5000/product/";
+const ADD_TO_CART_URL = "http://192.168.1.22:5000/addToCart";
+
 class Product extends React.Component {
   state = {
     product: {},
@@ -30,7 +32,22 @@ class Product extends React.Component {
   };
 
   btnAddToCartHandle() {
-    Alert.alert("Add To Cart");
+    var data = {
+      quantity: 1,
+      productId: this.state.product._id
+    };
+    try {
+      fetch(ADD_TO_CART_URL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(t => {
+          Alert.alert("Added To Cart");
+        });
+    } catch (error) {
+      Alert.alert("Could Not Added To Cart");
+    }
   }
 
   componentDidMount() {

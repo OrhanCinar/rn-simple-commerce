@@ -26,6 +26,7 @@ router.get("/cart", function(req, res, next) {
 
 router.post("addToCart", function(req, res, next) {
   try {
+    console.log("addToCart", res.params);
     var client = myMongo.getClient();
     client.connect((err, client) => {
       myMongo.handleConnection(err);
