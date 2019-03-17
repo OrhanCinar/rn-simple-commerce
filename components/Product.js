@@ -10,12 +10,15 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Product.style";
+var Spinner = require("rn-spinner");
+
 const PRODUCT_URL = "http://192.168.1.22:5000/product/";
 const ADD_TO_CART_URL = "http://192.168.1.22:5000/addToCart";
 
 class Product extends React.Component {
   state = {
     product: {},
+    quantity: 1,
     title: ""
   };
   static navigationOptions = ({ navigation }) => {
@@ -98,6 +101,20 @@ class Product extends React.Component {
             accessibilityLabel="product Image"
             source={{ uri: product.imageUrl }}
             style={styles.productImage}
+          />
+        </View>
+
+        <View>
+          <Spinner
+            max={10}
+            min={2}
+            default={5}
+            color="#f60"
+            numColor="#f60"
+            value={this.state.quantity}
+            onNumChange={num => {
+              this.setState({ quantity: num });
+            }}
           />
         </View>
 
