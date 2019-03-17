@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var myMongo = require("../config/mymongo");
 
-router.get("/cart", function(req, res, next) {
+router.get("/", function(req, res, next) {
   console.log("cart route hit");
 
   try {
@@ -24,7 +24,7 @@ router.get("/cart", function(req, res, next) {
   }
 });
 
-router.post("addToCart", function(req, res, next) {
+router.post("/addToCart", function(req, res, next) {
   try {
     console.log("addToCart", res.params);
     var client = myMongo.getClient();
@@ -34,7 +34,7 @@ router.post("addToCart", function(req, res, next) {
       const cart = db.collection("product");
       cart.insertOne({});
 
-      res.send({
+      res.jsonp({
         data: {}
       });
     });
@@ -52,7 +52,7 @@ router.post("removeFromCart", function(req, res, next) {
       myMongo.handleConnection(err);
       client.product.removeOne({});
 
-      res.send({
+      res.jsonp({
         data: {}
       });
     });

@@ -30,7 +30,9 @@ router.get("/product/:id", function(req, res, next) {
         product
       ) {
         if (err) {
-          res.jsonp(err);
+          res.jsonp({
+            status: "No Product"
+          });
         }
 
         if (product) {
