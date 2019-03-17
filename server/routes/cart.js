@@ -31,7 +31,8 @@ router.post("addToCart", function(req, res, next) {
     client.connect((err, client) => {
       myMongo.handleConnection(err);
       const db = client.db(myMongo.dbName);
-      client.product.insertOne({});
+      const cart = db.collection("product");
+      cart.insertOne({});
 
       res.send({
         data: {}
