@@ -16,19 +16,26 @@ router.post("/login", function(req, res, next) {
         { userName: userName, password: password },
         function(err, user) {
           if (err) {
-            res.jsonp({ error: "User Not Found" });
+            res.status.jsonp({ status: "NOTOK", error: "User Not Found" });
           }
 
-          res.jsonp({
-            user: user
-          });
+          if (user) {
+            res.jsonp({
+              status: "OK",
+              user: user
+            });
+          } else {
+            res.jsonp({
+              status: "NOTOK"
+            });
+          }
         }
       );
 
       client.close();
     });
   } catch (error) {
-    res.status(500).jsonp({ error: "Internal Error!" });
+    res.status(500).jsonp({ status: "OK", error: "Internal Error!" });
   }
 });
 
@@ -47,15 +54,22 @@ router.post("/register", function(req, res, next) {
         password: password
       });
 
-      //add user check
-      res.jsonp({
-        status: "User Registered"
-      });
-
+      if (user.acknowledged) {
+        //add user check
+        res.jsonp({
+          status: "OK",
+          status: "User Registered"
+        });
+      } else {
+        res.jsonp({
+          status: "NOTOK",
+          status: "User Not Registered"
+        });
+      }
       client.close();
     });
   } catch (error) {
-    res.status(500).jsonp({ error: "Internal Error!" });
+    res.status(500).jsonp({ status: "NOTOK", error: "Internal Error!" });
   }
 });
 
