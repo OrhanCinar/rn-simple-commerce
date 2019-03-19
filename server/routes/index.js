@@ -14,7 +14,7 @@ router.get("/products", function(req, res, next) {
 
       collProducts.find().toArray(function(err, result) {
         if (err) {
-          res.jsonp(err);
+          res.status(500).jsonp(err);
         }
 
         if (result.length > 0) {
@@ -23,8 +23,9 @@ router.get("/products", function(req, res, next) {
             item.imageUrl = cdnPath.concat(item.imageUrl);
           });
 
-          res.jsonp({
+          res.status(200).jsonp({
             data: {
+              status: "OK",
               products: result
             }
           });
@@ -51,7 +52,7 @@ router.get("/banners", function(req, res, next) {
 
       colBanners.find().toArray(function(err, result) {
         if (err) {
-          res.jsonp(err);
+          res.status(500).jsonp(err);
         }
 
         if (result.length > 0) {
@@ -59,7 +60,7 @@ router.get("/banners", function(req, res, next) {
             item.imageUrl = cdnPath.concat(item.imageUrl);
           });
 
-          res.jsonp({
+          res.status(200).jsonp({
             data: {
               banners: result
             }

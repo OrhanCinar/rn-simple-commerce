@@ -10,17 +10,20 @@ router.get("/category", function(req, res, next) {
       const db = client.db(myMongo.dbName);
       const bannerList = db.collection("banner");
       const categoryList = db.collection("category");
-      client.close();
-      res.send({
+
+      res.status(200).jsonp({
         data: {
+          status: "OK",
           bannerList: bannerList,
           categoryList: categoryList
         }
       });
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal Error!" });
+    res.status(500).jsonp({ error: "Internal Error!" });
   }
+
+  client.close();
 });
 
 module.exports = router;

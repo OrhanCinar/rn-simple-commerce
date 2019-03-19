@@ -27,6 +27,14 @@ app.get("/cart", cartRouter);
 app.get("/products", indexRouter);
 app.get("/banners", indexRouter);
 
+app.get("/", function(req, res, next) {
+  res.jsonp({
+    data: {
+      status: "OK"
+    }
+  });
+});
+
 app.use(function(req, res, next) {
   next(createError(404));
 });

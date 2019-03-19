@@ -12,7 +12,7 @@ router.get("/product/:id", function(req, res, next) {
   if (id === "0") {
     res.jsonp({
       data: {
-        status: "No Data",
+        status: "NOTOK",
         product: {}
       }
     });
@@ -31,7 +31,7 @@ router.get("/product/:id", function(req, res, next) {
       ) {
         if (err) {
           res.jsonp({
-            status: "No Product"
+            status: "NOTOK"
           });
         }
 
@@ -40,12 +40,13 @@ router.get("/product/:id", function(req, res, next) {
           product.imageUrl = cdnPath.concat(product.imageUrl);
           res.jsonp({
             data: {
+              status: "OK",
               product: product
             }
           });
         } else {
           res.jsonp({
-            status: "No Product"
+            status: "NOTOK"
           });
         }
       });
