@@ -10,6 +10,8 @@ const port = 5000;
 const indexRouter = require("./routes/index");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
+const userRouter = require("./routes/login");
+const categoryRouter = require("./routes/category");
 
 const corsOptions = {
   origin: "*",
@@ -26,6 +28,9 @@ app.get("/product/:id", productRouter);
 app.get("/cart", cartRouter);
 app.get("/products", indexRouter);
 app.get("/banners", indexRouter);
+app.post("/register", userRouter);
+app.post("/login", userRouter);
+app.get("/category", categoryRouter);
 
 app.get("/", function(req, res, next) {
   res.jsonp({
