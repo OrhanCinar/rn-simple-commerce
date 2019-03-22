@@ -24,13 +24,22 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//products
 app.get("/product/:id", productRouter);
-app.get("/cart", cartRouter);
 app.get("/products", indexRouter);
 app.get("/banners", indexRouter);
+
+//cart
+app.get("/cart", cartRouter);
+app.post("/addtocart", cartRouter);
+app.post("/removefromcart", cartRouter);
+
+//category
+app.get("/category", categoryRouter);
+
+//user
 app.post("/register", userRouter);
 app.post("/login", userRouter);
-app.get("/category", categoryRouter);
 
 app.get("/", function(req, res, next) {
   res.jsonp({
