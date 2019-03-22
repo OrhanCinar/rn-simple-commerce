@@ -1,9 +1,11 @@
 var express = require("express");
 var router = express.Router();
 var myMongo = require("../config/mymongo");
+const bodyParser = require("body-parser");
+var jsonParser = bodyParser.json();
 
-router.get("/cart", function(req, res, next) {
-  console.log("cart route hit");
+router.get("/cart", jsonParser, function(req, res, next) {
+  console.log("cart route hit", req.body);
 
   try {
     var client = myMongo.getClient();
@@ -31,40 +33,91 @@ router.get("/cart", function(req, res, next) {
   client.close();
 });
 
-router.post("/addToCart", function(req, res, next) {
+router.post("/addtocart", jsonParser, function(req, res, next) {
   try {
-    console.log("addToCart", res.params);
+    console.log("addToCart  route hit", req.body);
+
+    let userId = req.body.userId;
+    let productId = req.body.productId;
+
     var client = myMongo.getClient();
     client.connect((err, client) => {
       myMongo.handleConnection(err);
       const db = client.db(myMongo.dbName);
-      const cart = db.collection("product");
-      cart.insertOne({});
+      const cart = db.collection("cart");
+      cart.insertOne(
+        {
+          productId: productId,
+          userId: userId
+        },
+        function(err, result) {
+          if (err) {
+            res.jsonp({
+              data: {
+                status: "NOTOK",
+                message: "Product Not Added"
+              }
+            });
+          }
 
-      res.jsonp({
-        data: {}
-      });
+          if (result.insertedCount > 0) {
+            res.jsonp({
+              data: {
+                status: "OK",
+                message: "Product Added"
+              }
+            });
+          }
+        }
+      );
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal Error!" });
+    res.status(500).json({ status: "NOTOK", error: "Internal Error!" });
   }
 
   client.close();
 });
 
-router.post("removeFromCart", function(req, res, next) {
+router.post("/removefromcart", jsonParser, function(req, res, next) {
+  console.log("removefromcart route hit", req.body);
+
   try {
     var client = myMongo.getClient();
+
+    let userId = req.body.userId;
+    let productId = req.body.productId;
+
     client.connect((err, client) => {
       myMongo.handleConnection(err);
-      client.product.removeOne({});
 
-      res.jsonp({
-        data: {}
+      const db = client.db(myMongo.dbName);
+      const cart = db.collection("cart");
+
+      cart.deleteOne({ userId: userId, productId: productId }, function(
+        err,
+        result
+      ) {
+        if (err) {
+          res.jsonp({
+            data: {
+              status: "NOTOK",
+              message: "Product Not Deleted"
+            }
+          });
+        }
+
+        if (result.deletedCount > 0) {
+          res.jsonp({
+            data: {
+              status: "OK",
+              message: "Product Deleted"
+            }
+          });
+        }
       });
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ status: "NOTOK", error: "Internal Error!" });
   }
 
   client.close();
