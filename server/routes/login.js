@@ -19,7 +19,7 @@ router.post("/login", jsonParser, function(req, res, next) {
         { userName: userName, password: password },
         function(err, user) {
           if (err) {
-            res.status.jsonp({
+            res.jsonp({
               data: {
                 status: "NOTOK",
                 message: "User Not Found"
@@ -69,12 +69,13 @@ router.post("/register", jsonParser, function(req, res, next) {
       var password = req.body.password;
 
       const db = client.db(myMongo.dbName);
-      const user = db.collection("user").insertOne(
-        {
-          userName: userName,
-          password: password
-        },
-        function(err, response) {
+
+      const user = db
+        .collection("user")
+        .findOne({ userName: userName, password: password }, function(
+          err,
+          user
+        ) {
           if (err) {
             res.jsonp({
               data: {
@@ -83,25 +84,51 @@ router.post("/register", jsonParser, function(req, res, next) {
               }
             });
           }
-
-          if (response.insertedCount > 0) {
-            //add user check
-            res.jsonp({
-              data: {
-                status: "OK",
-                message: "User Registered"
-              }
-            });
-          } else {
+          //user is already registered
+          if (user._id !== "") {
             res.jsonp({
               data: {
                 status: "NOTOK",
                 message: "User Not Registered"
               }
             });
+          } else {
+            db.collection("user").insertOne(
+              {
+                userName: userName,
+                password: password
+              },
+              function(err, response) {
+                if (err) {
+                  res.jsonp({
+                    data: {
+                      status: "NOTOK",
+                      message: "User Not Registered"
+                    }
+                  });
+                }
+
+                if (response.insertedCount > 0) {
+                  //add user check
+                  res.jsonp({
+                    data: {
+                      status: "OK",
+                      message: "User Registered"
+                    }
+                  });
+                } else {
+                  res.jsonp({
+                    data: {
+                      status: "NOTOK",
+                      message: "User Not Registered"
+                    }
+                  });
+                }
+              }
+            );
           }
-        }
-      );
+        });
+
       client.close();
     });
   } catch (error) {
