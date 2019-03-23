@@ -24,14 +24,17 @@ router.get("/product/:id", function(req, res, next) {
       myMongo.handleConnection(err);
       const db = client.db(myMongo.dbName);
 
-      console.log("id", id);
+      //console.log("id", id);
       db.collection("product").findOne({ _id: ObjectID(id) }, function(
         err,
         product
       ) {
         if (err) {
           res.jsonp({
-            status: "NOTOK"
+            data: {
+              status: "NOTOK",
+              message: "Product not found"
+            }
           });
         }
 
@@ -53,7 +56,12 @@ router.get("/product/:id", function(req, res, next) {
     });
     client.close();
   } catch (error) {
-    res.jsonp(err);
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
 });
 

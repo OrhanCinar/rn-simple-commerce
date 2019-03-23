@@ -14,7 +14,12 @@ router.get("/category", function(req, res, next) {
 
       collCategory.find().toArray(function(err, result) {
         if (err) {
-          res.status(500).jsonp(err);
+          res.jsonp({
+            data: {
+              status: "NOTOK",
+              message: "Category not found"
+            }
+          });
         }
         console.log("category count", result.length);
         if (result.length > 0) {
@@ -27,11 +32,15 @@ router.get("/category", function(req, res, next) {
         }
       });
     });
+    client.close();
   } catch (error) {
-    res.status(500).jsonp({ error: "Internal Error!" });
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
-
-  client.close();
 });
 
 module.exports = router;

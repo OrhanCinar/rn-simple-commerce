@@ -21,7 +21,12 @@ router.post("/addProduct", (req, res) => {
       });
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal Error!" });
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
   client.close();
 });
@@ -42,7 +47,12 @@ router.post("/addBanner", (req, res) => {
       });
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal Error!" });
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
   client.close();
 });

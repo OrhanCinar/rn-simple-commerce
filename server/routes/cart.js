@@ -16,7 +16,12 @@ router.get("/cart", jsonParser, function(req, res, next) {
 
       cartProducts.find().toArray(function(err, result) {
         if (err) {
-          res.status(500).jsonp(err);
+          res.jsonp({
+            data: {
+              status: "NOTOK",
+              message: "Cart not found"
+            }
+          });
         }
         res.status(200).jsonp({
           data: {
@@ -27,7 +32,12 @@ router.get("/cart", jsonParser, function(req, res, next) {
       });
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal Error!" });
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
 
   client.close();
@@ -72,7 +82,12 @@ router.post("/addtocart", jsonParser, function(req, res, next) {
       );
     });
   } catch (error) {
-    res.status(500).json({ status: "NOTOK", error: "Internal Error!" });
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
 
   client.close();
@@ -117,7 +132,12 @@ router.post("/removefromcart", jsonParser, function(req, res, next) {
       });
     });
   } catch (error) {
-    res.status(500).json({ status: "NOTOK", error: "Internal Error!" });
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
 
   client.close();
