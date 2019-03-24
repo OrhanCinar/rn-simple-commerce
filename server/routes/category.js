@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var myMongo = require("../config/mymongo");
+const cdnPath = "http://192.168.1.22:5000/assets/Icons/";
 
 router.get("/category", function(req, res, next) {
   console.log("category route hit", req.params);
@@ -23,6 +24,11 @@ router.get("/category", function(req, res, next) {
         }
         console.log("category count", result.length);
         if (result.length > 0) {
+          result.forEach(item => {
+            //console.log(item.imageUrl);
+            item.imageUrl = cdnPath.concat(item.imageUrl);
+          });
+
           res.status(200).jsonp({
             data: {
               status: "OK",
