@@ -23,10 +23,21 @@ router.get("/cart", jsonParser, function(req, res, next) {
             }
           });
         }
+        let total = 0;
+        let subTotal = 0;
+        result.forEach(element => {
+          total += element.quantity * element.price;
+          subTotal += element.quantity * element.price;
+        });
+
         res.status(200).jsonp({
           data: {
             status: "OK",
-            cart: result
+            cart: result,
+            totals: {
+              total,
+              subTotal
+            }
           }
         });
       });
