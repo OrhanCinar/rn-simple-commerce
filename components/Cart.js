@@ -2,12 +2,44 @@ import React from "react";
 import { View, Text, TextInput, Image, Button, ScrollView } from "react-native";
 
 import styles from "./styles/Cart.style";
+const CART_URL = "http://192.168.1.22:5000/cart";
+const REMOVE_FROM_CART_URL = "http://192.168.1.22:5000/removefromcart";
 
 class Cart extends React.Component {
-  state = {};
+  state = {
+    products: []
+  };
   static navigationOptions = {
     title: "Cart"
   };
+
+  componentDidMount() {
+    fetch(CART_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          products: json.data.products
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  onRemoveItem() {
+    fetch(REMOVE_FROM_CART_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        //alert
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
   render() {
     return (
