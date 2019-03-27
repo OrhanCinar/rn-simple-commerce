@@ -1,13 +1,45 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import styles from "./styles/Category.style";
+const CATEGORY_URL = "http://192.168.1.22:5000/category";
 
 class Category extends React.Component {
-  state = {};
+  state = {
+    category: []
+  };
+
   static navigationOptions = {
     title: "Categories"
   };
+
+  componentDidMount() {
+    fetch(CATEGORY_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          category: json.data.categoryList
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
   render() {
+    if (
+      this.state.categoryList == null ||
+      this.state.categoryList.length == 0
+    ) {
+      return (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      );
+    }
+    const { categoryList } = this.state;
+
     return (
       <View>
         <View>
@@ -19,42 +51,15 @@ class Category extends React.Component {
 
         <ScrollView>
           <View style={styles.container}>
-            <View style={styles.categoryContainer}>
-              <Image
-                style={{ height: 100, width: 100 }}
-                source={require("../assets/Icons/bags.png")}
-              />
-              <Text>BAGS</Text>
-            </View>
-            <View style={styles.categoryContainer}>
-              <Image
-                style={{ height: 100, width: 100 }}
-                source={require("../assets/Icons/dress.png")}
-              />
-              <Text>WOMEN DRESS</Text>
-            </View>
-            <View style={styles.categoryContainer}>
-              <Image
-                style={{ height: 100, width: 100 }}
-                source={require("../assets/Icons/tools.png")}
-              />
-              <Text>TOOLS</Text>
-            </View>
-
-            <View style={styles.categoryContainer}>
-              <Image
-                style={{ height: 100, width: 100 }}
-                source={require("../assets/Icons/smartphone.png")}
-              />
-              <Text>SMARTPHONE</Text>
-            </View>
-            <View style={styles.categoryContainer}>
-              <Image
-                style={{ height: 100, width: 100 }}
-                source={require("../assets/Icons/computer.png")}
-              />
-              <Text>COMPUTERS</Text>
-            </View>
+            {categoryList.map(category => (
+              <View style={styles.categoryContainer}>
+                <Image
+                  style={{ height: 100, width: 100 }}
+                  source={{ uri: item.imageUrl }}
+                />
+                <Text>{category.name}</Text>
+              </View>
+            ))}
           </View>
         </ScrollView>
       </View>
