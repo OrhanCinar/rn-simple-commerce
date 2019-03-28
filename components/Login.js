@@ -26,12 +26,16 @@ class Login extends React.Component {
         return response.json();
       })
       .then(json => {
-        console.log(json.data);
+        //console.log(json.data);
+        this.setState({
+          userData: json.data
+        });
       })
       .catch(e => {
         console.log(e);
       });
 
+    console.log(this.state.userData);
     //this.props.navigation.navigate("Main", { id: 0 });
   }
   onRegister() {
@@ -71,8 +75,8 @@ class Login extends React.Component {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.push("Product", {
-                  itemId: Math.floor(Math.random() * 100)
+                this.props.navigation.push("Home", {
+                  //itemId: Math.floor(Math.random() * 100)
                 })
               }
             >
