@@ -9,6 +9,10 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Login.style";
+
+const REGISTER_URL = "http://192.168.1.22:5000/register";
+const LOGIN_URL = "http://192.168.1.22:5000/login";
+
 class Login extends React.Component {
   state = {};
 
@@ -17,9 +21,33 @@ class Login extends React.Component {
   };
 
   onLogin() {
-    this.props.navigation.navigate("Main", { id: 0 });
-  }
+    fetch(LOGIN_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        console.log(json.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
 
+    //this.props.navigation.navigate("Main", { id: 0 });
+  }
+  onRegister() {
+    fetch(REGISTER_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        console.log(json.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+    //this.props.navigation.navigate("Main", { id: 0 });
+  }
   render() {
     return (
       <ImageBackground

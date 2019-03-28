@@ -12,8 +12,8 @@ router.post("/login", jsonParser, function(req, res, next) {
       myMongo.handleConnection(err);
       const db = client.db(myMongo.dbName);
 
-      var userName = req.body.userName;
-      var password = req.body.password;
+      var userName = req.body.userName.trim();
+      var password = req.body.password.trim();
 
       db.collection("user").findOne(
         { userName: userName, password: password },
@@ -65,8 +65,8 @@ router.post("/register", jsonParser, function(req, res, next) {
     client.connect((err, client) => {
       myMongo.handleConnection(err);
 
-      var userName = req.body.userName;
-      var password = req.body.password;
+      var userName = req.body.userName.trim();
+      var password = req.body.password.trim();
 
       const db = client.db(myMongo.dbName);
 
