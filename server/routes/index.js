@@ -2,6 +2,7 @@ var myMongo = require("../config/mymongo");
 var express = require("express");
 var router = express.Router();
 const cdnPath = "http://192.168.1.22:5000/assets/Products/Images/";
+
 //Get Products
 router.get("/products", function(req, res, next) {
   console.log("index route hit");
@@ -14,7 +15,11 @@ router.get("/products", function(req, res, next) {
 
       collProducts.find().toArray(function(err, result) {
         if (err) {
-          res.status(500).jsonp(err);
+          res.status(500).jsonp({
+            data: {
+              status: "NOTOK"
+            }
+          });
         }
 
         if (result.length > 0) {
@@ -37,6 +42,64 @@ router.get("/products", function(req, res, next) {
     });
   } catch (error) {
     res.status(500).jsonp({ error: "Internal Error!" });
+  }
+});
+
+//search products
+router.get("/product/:q", function(req, res, next) {
+  console.log("product route hit", req.params);
+
+  const { q } = req.params;
+
+  if (q === "") {
+    res.jsonp({
+      data: {
+        status: "NOTOK",
+        product: {}
+      }
+    });
+  }
+
+  try {
+    var client = myMongo.getClient();
+    client.connect((err, client) => {
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
+
+      //console.log("id", id);
+      db.collection("product").find({ name: q }, function(err, result) {
+        if (err) {
+          res.jsonp({
+            data: {
+              status: "NOTOK",
+              message: "Product not found"
+            }
+          });
+        }
+
+        if (result.length > 0) {
+          result.forEach(item => {
+            //console.log(item.imageUrl);
+            item.imageUrl = cdnPath.concat(item.imageUrl);
+          });
+
+          res.status(200).jsonp({
+            data: {
+              status: "OK",
+              products: result
+            }
+          });
+        }
+      });
+    });
+    client.close();
+  } catch (error) {
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
   }
 });
 
