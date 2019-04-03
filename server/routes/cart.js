@@ -104,6 +104,61 @@ router.post("/addtocart", jsonParser, function(req, res, next) {
   client.close();
 });
 
+router.post("/updatecartproduct", jsonParser, function(req, res, next) {
+  try {
+    console.log("addToCart  route hit", req.body);
+
+    let userId = req.body.userId;
+    let productId = req.body.productId;
+    let quantity = req.body.quantity;
+
+    var client = myMongo.getClient();
+    client.connect((err, client) => {
+      myMongo.handleConnection(err);
+      const db = client.db(myMongo.dbName);
+      const cart = db.collection("cart");
+      cart.findOneAndUpdate(
+        {
+          productId: productId,
+          userId: userId
+        },
+        {
+          $set: { quantity: quantity }
+        },
+        { upsert: true },
+        function(err, result) {
+          if (err) {
+            res.jsonp({
+              data: {
+                status: "NOTOK",
+                message: "Product Not Updated"
+              }
+            });
+          }
+
+          if (result.insertedCount > 0) {
+            res.jsonp({
+              data: {
+                status: "OK",
+                message: "Product Updated"
+              }
+            });
+          }
+        }
+      );
+    });
+  } catch (error) {
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
+  }
+
+  client.close();
+});
+
 router.post("/removefromcart", jsonParser, function(req, res, next) {
   console.log("removefromcart route hit", req.body);
 
