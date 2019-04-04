@@ -60,7 +60,7 @@ router.post("/addtocart", jsonParser, function(req, res, next) {
 
     let userId = req.body.userId;
     let productId = req.body.productId;
-
+    let quantity = req.body.quantity;
     var client = myMongo.getClient();
     client.connect((err, client) => {
       myMongo.handleConnection(err);
@@ -69,6 +69,7 @@ router.post("/addtocart", jsonParser, function(req, res, next) {
       cart.insertOne(
         {
           productId: productId,
+          quantity: quantity,
           userId: userId
         },
         function(err, result) {
@@ -106,7 +107,7 @@ router.post("/addtocart", jsonParser, function(req, res, next) {
 
 router.post("/updatecartproduct", jsonParser, function(req, res, next) {
   try {
-    console.log("addToCart  route hit", req.body);
+    console.log("updatecartproduct  route hit", req.body);
 
     let userId = req.body.userId;
     let productId = req.body.productId;
@@ -125,9 +126,10 @@ router.post("/updatecartproduct", jsonParser, function(req, res, next) {
         {
           $set: { quantity: quantity }
         },
-        { upsert: true },
+        { upsert: false },
         function(err, result) {
           if (err) {
+            console.log("err", err);
             res.jsonp({
               data: {
                 status: "NOTOK",
@@ -135,8 +137,8 @@ router.post("/updatecartproduct", jsonParser, function(req, res, next) {
               }
             });
           }
-
-          if (result.insertedCount > 0) {
+          //console.log("result", result.ok);
+          if (result.ok === 1) {
             res.jsonp({
               data: {
                 status: "OK",
@@ -147,6 +149,8 @@ router.post("/updatecartproduct", jsonParser, function(req, res, next) {
         }
       );
     });
+
+    client.close();
   } catch (error) {
     res.status(500).jsonp({
       data: {
@@ -155,8 +159,6 @@ router.post("/updatecartproduct", jsonParser, function(req, res, next) {
       }
     });
   }
-
-  client.close();
 });
 
 router.post("/removefromcart", jsonParser, function(req, res, next) {

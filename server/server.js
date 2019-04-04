@@ -33,6 +33,7 @@ app.get("/banners", indexRouter);
 app.get("/cart", cartRouter);
 app.post("/addtocart", cartRouter);
 app.post("/removefromcart", cartRouter);
+app.post("/updatecartproduct", cartRouter);
 
 //category
 app.get("/category", categoryRouter);
