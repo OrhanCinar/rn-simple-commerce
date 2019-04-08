@@ -42,213 +42,51 @@ class Cart extends React.Component {
   }
 
   render() {
+    if (this.state.products == null || this.state.products.length == 0) {
+      return (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      );
+    }
+    const { products } = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.scrollContainer}>
           <ScrollView>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
+            {products.map(item => (
+              <View style={styles.productContainer}>
+                <Image
+                  id={item._id}
+                  accessibilityLabel={item.name}
+                  url
+                  source={{ uri: item.imageUrl }}
+                  style={styles.productImageContainer}
+                />
 
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
+                <View style={styles.productInfoContainer}>
+                  <Text style={styles.productHeader}>{item.name}</Text>
                 </View>
 
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
+                <View style={styles.priceContainer}>
+                  <View style={styles.priceRow}>
+                    <Text style={styles.priceLabel}>Price :</Text>
+                    <Text style={styles.price}>{item.price}</Text>
+                  </View>
 
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
+                  <View style={styles.priceRow}>
+                    <Text style={styles.priceLabel}>Quantity :</Text>
+                    <Text style={styles.price}>{item.quantity}</Text>
+                  </View>
 
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
+                  <View style={styles.priceRow}>
+                    <Text style={styles.priceLabel}>Total :</Text>
+                    <Text style={styles.price}>{item.total}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
-
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
-
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
-
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
-
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.productContainer}>
-              <Image
-                id="32740307068"
-                accessibilityLabel="product Image"
-                source={require("../assets/Products/Images/32880261657_01.jpg")}
-                style={styles.productImageContainer}
-              />
-
-              <View style={styles.productInfoContainer}>
-                <Text style={styles.productHeader}>Lingerie</Text>
-              </View>
-
-              <View style={styles.priceContainer}>
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>10.00</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Quantity :</Text>
-                  <Text style={styles.price}>5</Text>
-                </View>
-
-                <View style={styles.priceRow}>
-                  <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>50.00</Text>
-                </View>
-              </View>
-            </View>
+            ))}
           </ScrollView>
         </View>
 
