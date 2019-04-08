@@ -7,7 +7,8 @@ const REMOVE_FROM_CART_URL = "http://192.168.1.22:5000/removefromcart";
 
 class Cart extends React.Component {
   state = {
-    products: []
+    products: [],
+    totals :
   };
   static navigationOptions = {
     title: "Cart"
@@ -20,7 +21,8 @@ class Cart extends React.Component {
       })
       .then(json => {
         this.setState({
-          products: json.data.products
+          products: json.data.cart,
+          totals : json.data.totals
         });
       })
       .catch(e => {
@@ -93,17 +95,17 @@ class Cart extends React.Component {
         <View style={styles.totalsContainer}>
           <View style={styles.totalRow}>
             <Text style={styles.priceLabel}>TOTAL :</Text>
-            <Text style={styles.price}>50.00</Text>
+            <Text style={styles.price}>{this.state.totals.total}</Text>
           </View>
 
           <View style={styles.totalRow}>
             <Text style={styles.priceLabel}>DISCOUNT :</Text>
-            <Text style={styles.price}>0.00</Text>
+            <Text style={styles.price}>{this.state.totals.discount}</Text>
           </View>
 
           <View style={styles.totalRow}>
             <Text style={styles.priceLabel}>SUB TOTAL :</Text>
-            <Text style={styles.price}>50.00</Text>
+            <Text style={styles.price}>{this.state.totals.subTotal}</Text>
           </View>
         </View>
       </View>
