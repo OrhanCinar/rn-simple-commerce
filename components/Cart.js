@@ -8,7 +8,7 @@ const REMOVE_FROM_CART_URL = "http://192.168.1.22:5000/removefromcart";
 class Cart extends React.Component {
   state = {
     products: [],
-    totals :
+    totals: {}
   };
   static navigationOptions = {
     title: "Cart"
@@ -22,7 +22,7 @@ class Cart extends React.Component {
       .then(json => {
         this.setState({
           products: json.data.cart,
-          totals : json.data.totals
+          totals: json.data.totals
         });
       })
       .catch(e => {
