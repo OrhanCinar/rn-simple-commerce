@@ -14,7 +14,9 @@ const REGISTER_URL = "http://192.168.1.22:5000/register";
 const LOGIN_URL = "http://192.168.1.22:5000/login";
 
 class Login extends React.Component {
-  state = {};
+  state = {
+    userData: {}
+  };
 
   static navigationOptions = {
     title: "Login"
@@ -44,12 +46,14 @@ class Login extends React.Component {
         return response.json();
       })
       .then(json => {
-        console.log(json.data);
+        this.setState({
+          userData: json.data
+        });
       })
       .catch(e => {
         console.log(e);
       });
-
+    console.log(this.state.userData);
     //this.props.navigation.navigate("Main", { id: 0 });
   }
   render() {
