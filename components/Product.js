@@ -84,7 +84,7 @@ class Product extends React.Component {
     const { navigation } = this.props;
     const itemId = navigation.getParam("itemId", "0");
 
-    console.log("itemId", itemId);
+    //console.log("itemId", itemId);
     // if (!product) {
     //   return "No Product";
     // }

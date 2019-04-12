@@ -43,10 +43,7 @@ class Category extends React.Component {
     return (
       <View>
         <View>
-          <Image
-            source={require("../assets/Banners/HTB1oXyyaZrrK1RjSspa763REXXa5.png")}
-            style={{ height: 200, width: 400 }}
-          />
+          <Image source={require("")} style={{ height: 200, width: 400 }} />
         </View>
 
         <ScrollView>
