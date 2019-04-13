@@ -5,7 +5,8 @@ const CATEGORY_URL = "http://192.168.1.22:5000/category";
 
 class Category extends React.Component {
   state = {
-    category: []
+    category: [],
+    banner: []
   };
 
   static navigationOptions = {
@@ -38,13 +39,18 @@ class Category extends React.Component {
         </View>
       );
     }
-    const { categoryList } = this.state;
+    const { categoryList, banner } = this.state;
 
     return (
       <View>
-        <View>
-          <Image source={require("")} style={{ height: 200, width: 400 }} />
-        </View>
+        {banner.map(banner => (
+          <View>
+            <Image
+              source={{ uri: banner.imageUrl }}
+              style={{ height: 200, width: 400 }}
+            />
+          </View>
+        ))}
 
         <ScrollView>
           <View style={styles.container}>
