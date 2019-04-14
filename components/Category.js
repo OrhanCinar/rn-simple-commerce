@@ -58,7 +58,7 @@ class Category extends React.Component {
               <View style={styles.categoryContainer}>
                 <Image
                   style={{ height: 100, width: 100 }}
-                  source={{ uri: item.imageUrl }}
+                  source={{ uri: category.imageUrl }}
                 />
                 <Text>{category.name}</Text>
               </View>
