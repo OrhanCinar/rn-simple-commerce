@@ -36,7 +36,7 @@ class Product extends React.Component {
 
   btnAddToCartHandle() {
     var data = {
-      quantity: 1,
+      quantity: this.state.quantity,
       productId: this.state.product._id
     };
     try {
