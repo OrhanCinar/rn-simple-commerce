@@ -51,14 +51,15 @@ class Main extends React.Component {
   }
 
   render() {
-    if (this.state.products == null || this.state.products.length == 0) {
+    const { products } = this.state;
+
+    if (products.length == 0) {
       return (
         <View>
           <Text>Loading</Text>
         </View>
       );
     }
-    const { products } = this.state;
 
     return (
       <View style={styles.headerContainer}>
