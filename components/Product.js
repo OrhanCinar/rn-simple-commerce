@@ -10,7 +10,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Product.style";
-var Spinner = require("rn-spinner");
+//var Spinner = require("rn-spinner");
 
 const PRODUCT_URL = "http://192.168.1.22:5000/product/";
 const ADD_TO_CART_URL = "http://192.168.1.22:5000/addToCart";
@@ -104,7 +104,7 @@ class Product extends React.Component {
           />
         </View>
 
-        <View>
+        {/* <View>
           <Spinner
             max={10}
             min={2}
@@ -116,7 +116,7 @@ class Product extends React.Component {
               this.setState({ quantity: num });
             }}
           />
-        </View>
+        </View> */}
 
         <View style={styles.priceContainer}>
           <Text style={styles.oldPrice}>{product.oldPrice}</Text>
