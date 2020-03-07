@@ -1,7 +1,7 @@
 var myMongo = require("../config/mymongo");
 var express = require("express");
 var router = express.Router();
-const cdnPath = "http://192.168.1.22:5000/assets/Products/Images/";
+const cdnPath = "http://192.168.1.13:5000/assets/Products/Images/";
 
 //Get Products
 router.get("/products", function(req, res, next) {

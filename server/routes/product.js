@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var myMongo = require("../config/mymongo");
 var ObjectID = require("mongodb").ObjectID;
-const cdnPath = "http://192.168.1.22:5000/assets/Products/Images/";
+const cdnPath = "http://192.168.1.13:5000/assets/Products/Images/";
 
 router.get("/product/:id", function(req, res, next) {
   console.log("product route hit", req.params);

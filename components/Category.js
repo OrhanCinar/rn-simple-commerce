@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import styles from "./styles/Category.style";
-const CATEGORY_URL = "http://192.168.1.22:5000/category";
+const CATEGORY_URL = "http://192.168.1.13:5000/category";
 
 class Category extends React.Component {
   state = {
@@ -19,6 +19,7 @@ class Category extends React.Component {
         return response.json();
       })
       .then(json => {
+        console.log(json.data);
         this.setState({
           category: json.data.categoryList
         });
@@ -29,17 +30,14 @@ class Category extends React.Component {
   }
 
   render() {
-    if (
-      this.state.categoryList == null ||
-      this.state.categoryList.length == 0
-    ) {
+    if (this.state.category == null || this.state.category.length == 0) {
       return (
         <View>
           <Text>Loading</Text>
         </View>
       );
     }
-    const { categoryList, banner } = this.state;
+    const { category, banner } = this.state;
 
     return (
       <View>
@@ -54,7 +52,7 @@ class Category extends React.Component {
 
         <ScrollView>
           <View style={styles.container}>
-            {categoryList.map(category => (
+            {category.map(category => (
               <View style={styles.categoryContainer}>
                 <Image
                   style={{ height: 100, width: 100 }}

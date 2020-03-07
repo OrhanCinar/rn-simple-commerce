@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import styles from "./styles/Main.style";
 
-const PRODUCTS_URL = "http://192.168.1.22:5000/products";
-const BANNERS_URL = "http://192.168.1.22:5000/banners";
+const PRODUCTS_URL = "http://192.168.1.13:5000/products";
+const BANNERS_URL = "http://192.168.1.13:5000/banners";
 
 class Main extends React.Component {
   state = {
