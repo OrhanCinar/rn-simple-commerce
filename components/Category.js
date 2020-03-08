@@ -19,7 +19,7 @@ class Category extends React.Component {
         return response.json();
       })
       .then(json => {
-        console.log(json.data);
+        //console.log(json.data);
         this.setState({
           category: json.data.categoryList
         });
@@ -53,7 +53,7 @@ class Category extends React.Component {
         <ScrollView>
           <View style={styles.container}>
             {category.map(category => (
-              <View style={styles.categoryContainer}>
+              <View style={styles.categoryContainer} key={category._id}>
                 <Image
                   style={{ height: 100, width: 100 }}
                   source={{ uri: category.imageUrl }}

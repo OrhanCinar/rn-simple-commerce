@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,113 +9,91 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Main.style";
-
+import ProductScreen from "./Product";
 const PRODUCTS_URL = "http://192.168.1.13:5000/products";
 const BANNERS_URL = "http://192.168.1.13:5000/banners";
 
-class Main extends React.Component {
-  state = {
-    products: [],
-    banners: []
-  };
-  static navigationOptions = {
-    title: "Best Sellers"
-  };
+function Main({ navigation, route }) {
+  const [products, setProducts] = useState([]);
+  const [banners, setBanners] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
+    // if (route.params?.post) {
+    // }
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    //getBanners();
+  }, []);
+
+  async function getProducts() {
     fetch(PRODUCTS_URL)
       .then(response => {
         return response.json();
       })
       .then(json => {
-        this.setState({
-          products: json.data.products
-        });
+        setProducts(json.data.products);
+        // this.setState({
+        //   products: json.data.products
+        // });
       })
       .catch(e => {
         console.log(e);
       });
+  }
 
+  function getBanners() {
     fetch(BANNERS_URL)
       .then(response => {
         return response.json();
       })
       .then(json => {
-        this.setState({
-          banners: json.data.banners
-        });
+        setBanners(json.data.banners);
+        // this.setState({
+        //   banners: json.data.banners
+        // });
       })
       .catch(e => {
         console.log(e);
       });
   }
 
-  render() {
-    const { products } = this.state;
-
-    if (products.length == 0) {
-      return (
-        <View>
-          <Text>Loading</Text>
-        </View>
-      );
-    }
-
-    return (
-      <View style={styles.headerContainer}>
-        {/* <Text style={styles.headerText}>Most Selling Products</Text> */}
-        <ScrollView>
-          <View style={styles.container}>
-            {products.map(item => (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.push("Product", {
-                    itemId: item._id,
-                    title: item.name
-                  })
-                }
-                key={item._id}
-              >
-                <View style={styles.productContainer}>
-                  <Image
-                    url
-                    source={{ uri: item.imageUrl }}
-                    style={styles.productImage}
-                  />
-                  <View style={styles.productTextContainer}>
-                    <Text style={styles.productHeader}>{item.name}</Text>
-                  </View>
-                  <View style={styles.priceContainer}>
-                    <Text style={styles.oldPrice}>{item.oldPrice}</Text>
-                    <Text style={styles.price}>{item.price}</Text>
-                  </View>
+  return (
+    <View style={styles.headerContainer}>
+      {/* <Text style={styles.headerText}>Most Selling Products</Text> */}
+      <ScrollView>
+        <View style={styles.container}>
+          {products.map(item => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("ProductScreen", {
+                  screen: "ProductScreen",
+                  itemId: item._id,
+                  title: item.name
+                })
+              }
+              key={item._id}
+            >
+              <View style={styles.productContainer}>
+                <Image
+                  url
+                  source={{ uri: item.imageUrl }}
+                  style={styles.productImage}
+                />
+                <View style={styles.productTextContainer}>
+                  <Text style={styles.productHeader}>{item.name}</Text>
                 </View>
-              </TouchableOpacity>
-            ))}
-            {/* 
-            <View>
-              <Button
-                onPress={() =>
-                  this.props.navigation.push("Cart", {
-                    itemId: Math.floor(Math.random() * 100)
-                  })
-                }
-                title="Cart"
-              />
-              <Button
-                onPress={() =>
-                  this.props.navigation.push("Login", {
-                    itemId: Math.floor(Math.random() * 100)
-                  })
-                }
-                title="Login"
-              />
-            </View> */}
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
+                <View style={styles.priceContainer}>
+                  <Text style={styles.oldPrice}>{item.oldPrice}</Text>
+                  <Text style={styles.price}>{item.price}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
-
 export default Main;

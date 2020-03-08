@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 import {
   StyleSheet,
@@ -28,7 +30,7 @@ const Tab = createBottomTabNavigator();
 
 // import Login from "./components/Login";
 
-// import Product from "./components/Product";
+import ProductScreen from "./components/Product";
 import Category from "./components/Category";
 // import Cart from "./components/Cart";
 
@@ -38,6 +40,7 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={Main}></Tab.Screen>
         <Tab.Screen name="Category" component={Category}></Tab.Screen>
+        <Tab.Screen name="ProductScreen" component={ProductScreen}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );
