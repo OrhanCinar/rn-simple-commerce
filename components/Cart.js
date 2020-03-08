@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, TextInput, Image, Button, ScrollView } from "react-native";
 
 import styles from "./styles/Cart.style";
-const CART_URL = "http://192.168.1.22:5000/cart";
-const REMOVE_FROM_CART_URL = "http://192.168.1.22:5000/removefromcart";
+
+import { scConfig } from "../config";
 
 class Cart extends React.Component {
   state = {
@@ -15,11 +15,12 @@ class Cart extends React.Component {
   };
 
   componentDidMount() {
-    fetch(CART_URL)
+    fetch(scConfig.CART_URL)
       .then(response => {
         return response.json();
       })
       .then(json => {
+        console.log(json);
         this.setState({
           products: json.data.cart,
           totals: json.data.totals
@@ -31,7 +32,7 @@ class Cart extends React.Component {
   }
 
   onRemoveItem() {
-    fetch(REMOVE_FROM_CART_URL)
+    fetch(scConfig.REMOVE_FROM_CART_URL)
       .then(response => {
         return response.json();
       })

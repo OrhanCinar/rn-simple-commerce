@@ -10,6 +10,8 @@ import {
   TouchableOpacity
 } from "react-native";
 import styles from "./styles/Product.style";
+import InputSpinner from "react-native-input-spinner";
+
 //var Spinner = require("rn-spinner");
 
 import { scConfig } from "../config";
@@ -35,7 +37,7 @@ function ProductScreen({ route, navigation }) {
   const [product, setProduct] = useState("");
   const [title, setTitle] = useState("");
   const { itemId } = route.params;
-  const { quantity, setQuantity } = useState(0);
+  const [quantity, setQuantity] = useState(0);
   useEffect(() => {
     console.log("product detail page useEffect");
 
@@ -73,7 +75,7 @@ function ProductScreen({ route, navigation }) {
       productId: product._id
     };
     try {
-      fetch(ADD_TO_CART_URL, {
+      fetch(scConfig.ADD_TO_CART_URL, {
         method: "POST",
         body: JSON.stringify(data)
       })
@@ -85,29 +87,11 @@ function ProductScreen({ route, navigation }) {
       Alert.alert("Could Not Added To Cart");
     }
   }
-
-  // render() {
-  //   const { product } = this.state;
-  //   const { navigation } = this.props;
-  //   const itemId = navigation.getParam("itemId", "0");
-
-  //console.log("itemId", itemId);
-  // if (!product) {
-  //   return "No Product";
-  // }
-
-  // return (
-  //   <View>
-  //     <Text>{product.name}</Text>
-  //   </View>
-  // );
-
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.productHeader}>{product.name}</Text>
       </View>
-
       <View style={styles.imageContainer}>
         <Image
           id={product._id}
@@ -116,31 +100,27 @@ function ProductScreen({ route, navigation }) {
           style={styles.productImage}
         />
       </View>
-
-      {/* <View>
-          <Spinner
-            max={10}
-            min={2}
-            default={5}
-            color="#f60"
-            numColor="#f60"
-            value={this.state.quantity}
-            onNumChange={num => {
-              this.setState({ quantity: num });
-            }}
-          />
-        </View> */}
+      <View style={styles.quantityContainer}>
+        <InputSpinner
+          max={10}
+          min={1}
+          step={1}
+          colorMax={"#f04048"}
+          colorMin={"#40c5f4"}
+          value={quantity}
+          onChange={num => setQuantity(num)}
+        />
+      </View>
 
       <View style={styles.priceContainer}>
-        <Text style={styles.oldPrice}>{product.oldPrice}</Text>
-        <Text style={styles.price}>{product.price}</Text>
+        <Text style={styles.oldPrice}>${product.oldPrice}</Text>
+        <Text style={styles.price}>${product.price}</Text>
       </View>
       {/* ADD SPINNER FOR QUANTITY */}
       {/* <Image accessibilityLabel="favorite" /> */}
       <View>
         <Text style={styles.description}>{product.description}</Text>
       </View>
-
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={btnAddToCartHandle}>
           <Text style={styles.buttonText}>ADD TO CART</Text>

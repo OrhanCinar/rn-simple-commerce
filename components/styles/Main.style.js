@@ -7,7 +7,8 @@ export default styles = StyleSheet.create({
     flexWrap: "wrap",
     flexDirection: "row",
     marginLeft: 2,
-    marginRight: 2
+    marginRight: 2,
+    marginTop: 50
   },
   productContainer: {
     marginBottom: 10,

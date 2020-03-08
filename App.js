@@ -32,7 +32,7 @@ const Tab = createBottomTabNavigator();
 
 import ProductScreen from "./components/Product";
 import Category from "./components/Category";
-// import Cart from "./components/Cart";
+import Cart from "./components/Cart";
 
 export default function App() {
   return (
@@ -41,6 +41,7 @@ export default function App() {
         <Tab.Screen name="Home" component={Main}></Tab.Screen>
         <Tab.Screen name="Category" component={Category}></Tab.Screen>
         <Tab.Screen name="ProductScreen" component={ProductScreen}></Tab.Screen>
+        <Tab.Screen name="Cart" component={Cart}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );

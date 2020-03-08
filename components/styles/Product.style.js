@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 
-export default (styles = StyleSheet.create({
+export default styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: "#f4f4f4"
+    backgroundColor: "#f4f4f4",
+    marginTop: 50
   },
 
   //header
@@ -73,6 +74,16 @@ export default (styles = StyleSheet.create({
     fontSize: 16
   },
 
+  //quantity
+  quantityContainer: {
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
+
+    marginBottom: 1,
+    flexShrink: 1
+  },
+
   //button
   buttonContainer: {
     height: 60,
@@ -85,4 +96,4 @@ export default (styles = StyleSheet.create({
     color: "#fff",
     fontSize: 22
   }
-}));
+});

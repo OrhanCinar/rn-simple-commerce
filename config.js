@@ -7,5 +7,8 @@ export const scConfig = {
   CATEGORY_URL: "http://192.168.1.13:5000/category",
 
   PRODUCT_URL: "http://192.168.1.13:5000/product/",
-  ADD_TO_CART_URL: "http://192.168.1.13:5000/addToCart"
+  ADD_TO_CART_URL: "http://192.168.1.13:5000/addToCart",
+
+  CART_URL: "http://192.168.1.13:5000/cart",
+  REMOVE_FROM_CART_URL: "http://192.168.1.13:5000/removefromcart"
 };
