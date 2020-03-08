@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import styles from "./styles/Main.style";
 import ProductScreen from "./Product";
-const PRODUCTS_URL = "http://192.168.1.13:5000/products";
-const BANNERS_URL = "http://192.168.1.13:5000/banners";
+// const PRODUCTS_URL = "http://192.168.1.13:5000/products";
+// const BANNERS_URL = "http://192.168.1.13:5000/banners";
+
+import { scConfig } from "../config";
 
 function Main({ navigation, route }) {
   const [products, setProducts] = useState([]);
@@ -20,6 +22,7 @@ function Main({ navigation, route }) {
   useEffect(() => {
     // if (route.params?.post) {
     // }
+    console.log(scConfig);
     getProducts();
   }, []);
 
@@ -28,7 +31,7 @@ function Main({ navigation, route }) {
   }, []);
 
   async function getProducts() {
-    fetch(PRODUCTS_URL)
+    fetch(scConfig.PRODUCTS_URL)
       .then(response => {
         return response.json();
       })
@@ -44,7 +47,7 @@ function Main({ navigation, route }) {
   }
 
   function getBanners() {
-    fetch(BANNERS_URL)
+    fetch(scConfig.BANNERS_URL)
       .then(response => {
         return response.json();
       })

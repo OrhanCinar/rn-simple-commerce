@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import styles from "./styles/Category.style";
-const CATEGORY_URL = "http://192.168.1.13:5000/category";
+import { scConfig } from "../config";
 
 class Category extends React.Component {
   state = {
@@ -14,7 +14,7 @@ class Category extends React.Component {
   };
 
   componentDidMount() {
-    fetch(CATEGORY_URL)
+    fetch(scConfig.CATEGORY_URL)
       .then(response => {
         return response.json();
       })

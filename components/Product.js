@@ -12,8 +12,7 @@ import {
 import styles from "./styles/Product.style";
 //var Spinner = require("rn-spinner");
 
-const PRODUCT_URL = "http://192.168.1.13:5000/product/";
-const ADD_TO_CART_URL = "http://192.168.1.13:5000/addToCart";
+import { scConfig } from "../config";
 
 function ProductScreen({ route, navigation }) {
   // state = {
@@ -48,8 +47,8 @@ function ProductScreen({ route, navigation }) {
 
     console.log("itemId", itemId);
     if (itemId !== "0") {
-      console.log("itemId", PRODUCT_URL + itemId);
-      await fetch(PRODUCT_URL + itemId)
+      console.log("itemId", scConfig.PRODUCT_URL + itemId);
+      await fetch(scConfig.PRODUCT_URL + itemId)
         .then(response => {
           return response.json();
         })
