@@ -22,7 +22,7 @@ function Main({ navigation, route }) {
   useEffect(() => {
     // if (route.params?.post) {
     // }
-    console.log(scConfig);
+    //console.log(scConfig);
     getProducts();
   }, []);
 

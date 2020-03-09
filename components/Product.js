@@ -37,11 +37,11 @@ function ProductScreen({ route, navigation }) {
   const [product, setProduct] = useState("");
   const [title, setTitle] = useState("");
   const { itemId } = route.params;
-  const [quantity, setQuantity] = useState(0);
-  useEffect(() => {
-    console.log("product detail page useEffect");
+  const [quantity, setQuantity] = useState(1);
 
+  useEffect(() => {
     getProduct();
+    setQuantity(1);
   }, [itemId]);
 
   async function getProduct() {
