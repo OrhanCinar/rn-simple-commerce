@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
+import { AppLoading } from "expo";
+import { Container, Text } from "native-base";
+import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 
 import {
@@ -35,6 +38,21 @@ import Category from "./components/Category";
 import Cart from "./components/Cart";
 
 export default function App() {
+  const [isReady, setReady] = useState(false);
+
+  useEffect(() => {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    setReady(true);
+  });
+
+  if (!isReady){
+    return <AppLoading />;        
+  }
+
   return (
     <NavigationContainer>
       <Tab.Navigator>
