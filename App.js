@@ -11,12 +11,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import {
   StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  Alert
+  Text
+ 
 } from "react-native";
 
 // function HomeScreen() {
