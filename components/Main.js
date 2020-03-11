@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import styles from "./styles/Main.style";
 import ProductScreen from "./Product";
-// const PRODUCTS_URL = "http://192.168.1.13:5000/products";
-// const BANNERS_URL = "http://192.168.1.13:5000/banners";
 
 import { scConfig } from "../config";
 
