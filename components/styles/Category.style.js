@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
-export default (styles = StyleSheet.create({
+export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E0F7FA",
+    //  backgroundColor: "#E0F7FA",
     flexWrap: "wrap",
     flexDirection: "row",
     marginLeft: 2,
@@ -12,16 +12,25 @@ export default (styles = StyleSheet.create({
     alignItems: "center"
   },
   categoryContainer: {
-    marginBottom: 10,
-    marginLeft: 2,
+    marginBottom: 5,
+    marginLeft: 5,
     // marginTop: 10,
     borderRadius: 8,
     borderWidth: 0.9,
     borderColor: "#00BCD4",
-    width: 200,
-    height: 200,
+    width: 190,
+    height: 180,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  header: {
     justifyContent: "center",
     alignItems: "center",
-    flexGrow: 1
+    marginTop: 10
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#808080"
   }
-}));
+});

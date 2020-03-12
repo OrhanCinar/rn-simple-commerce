@@ -5,8 +5,8 @@ export default styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: "#f4f4f4",
-    marginTop: 50
+    backgroundColor: "#f4f4f4"
+    // marginTop: 50
   },
 
   //header

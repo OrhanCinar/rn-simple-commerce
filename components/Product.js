@@ -49,13 +49,13 @@ function ProductScreen({ route, navigation }) {
 
     console.log("itemId", itemId);
     if (itemId !== "0") {
-      console.log("itemId", scConfig.PRODUCT_URL + itemId);
+      //console.log("itemId", scConfig.PRODUCT_URL + itemId);
       await fetch(scConfig.PRODUCT_URL + itemId)
         .then(response => {
           return response.json();
         })
         .then(json => {
-          console.log(json.data.product);
+          //console.log(json.data.product);
           setProduct(json.data.product);
           setTitle(json.data.product.title);
           // this.setState({

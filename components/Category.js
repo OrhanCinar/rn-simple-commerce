@@ -40,7 +40,7 @@ class Category extends React.Component {
     const { category, banner } = this.state;
 
     return (
-      <View>
+      <View style={{ marginTop: 20 }}>
         {banner.map(banner => (
           <View>
             <Image
@@ -49,7 +49,9 @@ class Category extends React.Component {
             />
           </View>
         ))}
-
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Categories</Text>
+        </View>
         <ScrollView>
           <View style={styles.container}>
             {category.map(category => (

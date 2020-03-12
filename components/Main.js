@@ -6,8 +6,10 @@ import {
   ListView,
   ScrollView,
   Button,
+  TextInput,
   TouchableOpacity
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import styles from "./styles/Main.style";
 import ProductScreen from "./Product";
 
@@ -62,7 +64,34 @@ function Main({ navigation, route }) {
 
   return (
     <View style={styles.headerContainer}>
-      {/* <Text style={styles.headerText}>Most Selling Products</Text> */}
+      {/* <Text style={styles.headerText}>Helix E-Commerce</Text> */}
+      <View style={styles.searchBoxContainer}>
+        <TextInput placeholder="Search..." style={styles.searchBox}></TextInput>
+      </View>
+      {products.length > 0 && (
+        <View style={styles.bannerContainer}>
+          <Image
+            url
+            source={{ uri: products[0].imageUrl }}
+            style={styles.bannerImage}
+          />
+        </View>
+      )}
+      <View style={styles.categoryBar}>
+        <Ionicons
+          name="md-pricetags"
+          style={{ marginRight: 50, marginLeft: 40 }}
+          size={30}
+        />
+        <Ionicons name="ios-cart" style={{ marginRight: 50 }} size={30} />
+        <Ionicons
+          name="ios-american-football"
+          style={{ marginRight: 50 }}
+          size={30}
+        />
+        <Ionicons name="ios-desktop" style={{ marginRight: 50 }} size={30} />
+        <Ionicons name="ios-cube" style={{ marginRight: 50 }} size={30} />
+      </View>
       <ScrollView>
         <View style={styles.container}>
           {products.map(item => (
@@ -86,8 +115,8 @@ function Main({ navigation, route }) {
                   <Text style={styles.productHeader}>{item.name}</Text>
                 </View>
                 <View style={styles.priceContainer}>
-                  <Text style={styles.oldPrice}>{item.oldPrice}</Text>
-                  <Text style={styles.price}>{item.price}</Text>
+                  <Text style={styles.oldPrice}>$ {item.oldPrice}</Text>
+                  <Text style={styles.price}>$ {item.price}</Text>
                 </View>
               </View>
             </TouchableOpacity>

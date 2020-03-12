@@ -8,8 +8,22 @@ export default styles = StyleSheet.create({
     flexDirection: "row",
     marginLeft: 2,
     marginRight: 2,
-    marginTop: 50
+    marginTop: 0
   },
+  bannerContainer: {
+    margin: 5
+  },
+  bannerImage: {
+    //flex: 1,
+    width: 350,
+    height: 150,
+    margin: 5,
+    flexDirection: "row",
+    alignSelf: "stretch",
+    textAlign: "center",
+    alignContent: "center"
+  },
+
   productContainer: {
     marginBottom: 10,
     marginLeft: 2,
@@ -55,15 +69,49 @@ export default styles = StyleSheet.create({
 
   //HEADER
   headerContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+    //marginTop: 50
+  },
+  headerText: {
+    color: "#000",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginTop: 0,
     alignItems: "center",
     justifyContent: "center"
   },
-  headerText: {
-    color: "#FF007F",
-    fontWeight: "bold",
-    fontSize: 25,
-    marginTop: 50,
-    alignItems: "center",
-    justifyContent: "center"
+  searchBoxContainer: {
+    flexDirection: "column",
+    alignSelf: "stretch",
+    borderBottomWidth: 1,
+    borderBottomColor: "#80cef2"
+  },
+  searchBox: {
+    borderWidth: 1,
+    alignSelf: "stretch",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    borderColor: "#5ecbf2",
+    textAlign: "center",
+    color: "#000",
+    margin: 15,
+    fontSize: 20,
+    height: 40
+  },
+  categoryBar: {
+    flexDirection: "row",
+    alignSelf: "stretch",
+    textAlign: "center",
+    alignContent: "center",
+    marginTop: 10,
+    marginBottom: 5,
+    paddingBottom: 10,
+    paddingTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#71cbf5",
+    borderTopWidth: 1,
+    borderTopColor: "#80cef2"
   }
 });

@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
 import { AppLoading } from "expo";
-import { Container, Text } from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 
-import {
-  StyleSheet,
-  Text
- 
-} from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 // function HomeScreen() {
 //   return (
@@ -32,31 +27,49 @@ const Tab = createBottomTabNavigator();
 import ProductScreen from "./components/Product";
 import Category from "./components/Category";
 import Cart from "./components/Cart";
+const Stack = createStackNavigator();
+
+function HomeNav() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          return <Ionicons name="ios-information-circle"></Ionicons>;
+        }
+      })}
+    >
+      <Tab.Screen name="Home" component={Main}></Tab.Screen>
+      <Tab.Screen name="Category" component={Category}></Tab.Screen>
+
+      <Tab.Screen name="Cart" component={Cart}></Tab.Screen>
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   const [isReady, setReady] = useState(false);
 
   useEffect(() => {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
     setReady(true);
   });
 
-  if (!isReady){
-    return <AppLoading />;        
+  if (!isReady) {
+    return <AppLoading />;
   }
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Main}></Tab.Screen>
-        <Tab.Screen name="Category" component={Category}></Tab.Screen>
-        <Tab.Screen name="ProductScreen" component={ProductScreen}></Tab.Screen>
-        <Tab.Screen name="Cart" component={Cart}></Tab.Screen>
-      </Tab.Navigator>
+      <Stack.Navigator initialRouteName="HomeNav">
+        <Stack.Screen
+          name="HomeNav"
+          component={HomeNav}
+          options={{ title: "Helix E-Commerce" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="ProductScreen"
+          component={ProductScreen}
+        ></Stack.Screen>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
