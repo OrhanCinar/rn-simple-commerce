@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./styles/Main.style";
-import ProductScreen from "./Product";
+//import ProductScreen from "./Product";
 
 import { scConfig } from "../config";
 
