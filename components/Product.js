@@ -12,28 +12,9 @@ import {
 import styles from "./styles/Product.style";
 import InputSpinner from "react-native-input-spinner";
 
-//var Spinner = require("rn-spinner");
-
 import { scConfig } from "../config";
 
 function ProductScreen({ route, navigation }) {
-  // state = {
-  //   product: {},
-  //   quantity: 1,
-  //   title: ""
-  // };
-  // static navigationOptions = ({ navigation }) => {
-  //   return {
-  //     title: navigation.getParam("title", "Go Back")
-  //     // headerLeft: (
-  //     //   <Button
-  //     //     onPress={() => navigation.popToTop()}
-  //     //     title="Info"
-  //     //     color="#fff"
-  //     //   />
-  //     // )
-  //   };
-  // };
   const [product, setProduct] = useState("");
   const [title, setTitle] = useState("");
   const { itemId } = route.params;
@@ -58,10 +39,6 @@ function ProductScreen({ route, navigation }) {
           //console.log(json.data.product);
           setProduct(json.data.product);
           setTitle(json.data.product.title);
-          // this.setState({
-          //   product: json.data.product,
-          //   title: json.data.product.title
-          // });
         })
         .catch(e => {
           console.log(e);
