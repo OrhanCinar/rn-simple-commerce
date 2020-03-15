@@ -93,7 +93,7 @@ function ProductScreen({ route, navigation }) {
         <Text style={styles.oldPrice}>${product.oldPrice}</Text>
         <Text style={styles.price}>${product.price}</Text>
       </View>
-      {/* ADD SPINNER FOR QUANTITY */}
+
       {/* <Image accessibilityLabel="favorite" /> */}
       <View>
         <Text style={styles.description}>{product.description}</Text>
