@@ -22,6 +22,9 @@ function ProductScreen({ route, navigation }) {
 
   useEffect(() => {
     getProduct();
+  }, []);
+
+  useEffect(() => {
     setQuantity(1);
   }, [itemId]);
 

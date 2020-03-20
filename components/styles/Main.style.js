@@ -20,7 +20,7 @@ export default styles = StyleSheet.create({
     margin: 5,
     flexDirection: "row",
     alignSelf: "stretch",
-    textAlign: "center",
+    // textAlign: "center",
     alignContent: "center"
   },
 

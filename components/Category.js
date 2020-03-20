@@ -5,6 +5,7 @@ import { scConfig } from "../config";
 
 function Category() {
   const [categories, setCategories] = useState([]);
+  const [banner, setBanner] = useState([]);
   const hasItems = categories.length > 0;
 
   function getCategories() {
@@ -14,7 +15,7 @@ function Category() {
       })
       .then(json => {
         //console.log(json.data);
-        setCategories / json.data.categoryList();
+        setCategories(json.data.categoryList);
       })
       .catch(e => {
         console.log(e);
