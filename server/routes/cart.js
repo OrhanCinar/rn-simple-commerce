@@ -3,6 +3,8 @@ var router = express.Router();
 var myMongo = require("../config/mymongo");
 const bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
+var ObjectID = require("mongodb").ObjectID;
+const cdnPath = "http://192.168.1.13:5000/assets/Products/Images/";
 
 router.get("/cart", jsonParser, function(req, res, next) {
   console.log("cart route hit", req.body);
@@ -25,15 +27,34 @@ router.get("/cart", jsonParser, function(req, res, next) {
         }
         let total = 0;
         let subTotal = 0;
+        var images = {};
+        // images["id"] = "orhan";
         result.forEach(element => {
-          total += element.quantity * element.price;
-          subTotal += element.quantity * element.price;
-        });
+          //console.log(element);
 
+          let id = element.productId;
+
+          db.collection("product").findOne({ _id: ObjectID(id) }, function(
+            err,
+            product
+          ) {
+            // console.log("id", id);
+            if (product) {
+              this.images["id"] = "orhan"; //product.imageUrl;
+              total += element.quantity * product.price;
+              subTotal += element.quantity * product.price;
+              console.log("cart product found", product.imageUrl);
+            } else {
+              //console.log("cart product not found", id);
+            }
+          }); // db collect
+        });
+        //console.log(result);
         res.status(200).jsonp({
           data: {
             status: "OK",
             cart: result,
+            images: images,
             totals: {
               total,
               subTotal

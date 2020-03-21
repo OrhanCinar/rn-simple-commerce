@@ -52,7 +52,7 @@ router.get("/product/:id", function(req, res, next) {
             status: "NOTOK"
           });
         }
-      });
+      }); // db collect
     });
     client.close();
   } catch (error) {

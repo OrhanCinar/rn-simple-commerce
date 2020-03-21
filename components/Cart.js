@@ -6,8 +6,8 @@ import styles from "./styles/Cart.style";
 import { scConfig } from "../config";
 
 function Cart() {
-  conts[(products, setProducts)] = useState([]);
-  conts[(totals, setTotals)] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [totals, setTotals] = useState([]);
 
   useEffect(() => {
     getCart();
@@ -93,17 +93,17 @@ function Cart() {
       <View style={styles.totalsContainer}>
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>TOTAL :</Text>
-          <Text style={styles.price}>{this.state.totals.total}</Text>
+          <Text style={styles.price}>{totals.total}</Text>
         </View>
 
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>DISCOUNT :</Text>
-          <Text style={styles.price}>{this.state.totals.discount}</Text>
+          <Text style={styles.price}>{totals.discount}</Text>
         </View>
 
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>SUB TOTAL :</Text>
-          <Text style={styles.price}>{this.state.totals.subTotal}</Text>
+          <Text style={styles.price}>{totals.subTotal}</Text>
         </View>
       </View>
     </View>

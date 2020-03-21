@@ -54,8 +54,15 @@ function ProductScreen({ route, navigation }) {
       quantity: quantity,
       productId: product._id
     };
+
+    // console.log("btnAddToCartHandle", data);
+
     try {
       fetch(scConfig.ADD_TO_CART_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
         method: "POST",
         body: JSON.stringify(data)
       })
