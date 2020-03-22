@@ -22,7 +22,7 @@ router.get("/product/:id", function(req, res, next) {
     var client = myMongo.getClient();
     client.connect((err, client) => {
       myMongo.handleConnection(err);
-      const db = client.db(myMongo.dbName);
+      let db = client.db(myMongo.dbName);
 
       //console.log("id", id);
       db.collection("product").findOne({ _id: ObjectID(id) }, function(
@@ -41,6 +41,7 @@ router.get("/product/:id", function(req, res, next) {
         if (product) {
           //console.log(result);
           product.imageUrl = cdnPath.concat(product.imageUrl);
+          client.close();
           res.jsonp({
             data: {
               status: "OK",
