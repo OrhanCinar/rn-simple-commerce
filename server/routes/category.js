@@ -28,7 +28,7 @@ router.get("/category", function(req, res, next) {
             //console.log(item.imageUrl);
             item.imageUrl = cdnPath.concat(item.imageUrl);
           });
-
+          client.close();
           res.status(200).jsonp({
             data: {
               status: "OK",
