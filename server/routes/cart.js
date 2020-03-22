@@ -27,37 +27,24 @@ router.get("/cart", jsonParser, function(req, res, next) {
         }
         let total = 0;
         let subTotal = 0;
-        var images = {};
-        // images["id"] = "orhan";
+
         result.forEach(element => {
           //console.log(element);
 
-          let id = element.productId;
-
-          db.collection("product").findOne({ _id: ObjectID(id) }, function(
-            err,
-            product
-          ) {
-            // console.log("id", id);
-            if (product) {
-              this.images["id"] = "orhan"; //product.imageUrl;
-              total += element.quantity * product.price;
-              subTotal += element.quantity * product.price;
-              console.log("cart product found", product.imageUrl);
-            } else {
-              //console.log("cart product not found", id);
-            }
-          }); // db collect
+          total += element.quantity * element.price;
+          subTotal += element.quantity * element.price;
         });
+
+        client.close();
         //console.log(result);
         res.status(200).jsonp({
           data: {
             status: "OK",
             cart: result,
-            images: images,
             totals: {
               total,
-              subTotal
+              subTotal,
+              discount: 0
             }
           }
         });
@@ -75,6 +62,18 @@ router.get("/cart", jsonParser, function(req, res, next) {
   client.close();
 });
 
+async function findProduct(productId) {
+  const client = myMongo.getClient();
+  //myMongo.handleConnection(err);
+  const dbo = await client.connect();
+  const db = dbo.db(myMongo.dbName);
+  const product = await db
+    .collection("product")
+    .findOne({ _id: ObjectID(productId) });
+  //console.log("findProduct", product.imageUrl);
+  return product.imageUrl;
+}
+
 router.post("/addtocart", jsonParser, function(req, res, next) {
   try {
     console.log("addToCart  route hit", req.body);
@@ -82,16 +81,24 @@ router.post("/addtocart", jsonParser, function(req, res, next) {
     let userId = req.body.userId;
     let productId = req.body.productId;
     let quantity = req.body.quantity;
+    let imageUrl = req.body.imageUrl;
+    let price = req.body.price;
+    let name = req.body.name;
+
     var client = myMongo.getClient();
     client.connect((err, client) => {
       myMongo.handleConnection(err);
       const db = client.db(myMongo.dbName);
       const cart = db.collection("cart");
+
       cart.insertOne(
         {
           productId: productId,
+          price: price,
+          imageUrl: imageUrl,
           quantity: quantity,
-          userId: userId
+          userId: userId,
+          name: name
         },
         function(err, result) {
           if (err) {
@@ -229,6 +236,57 @@ router.post("/removefromcart", jsonParser, function(req, res, next) {
     });
   }
 
+  client.close();
+});
+
+router.post("/clearcart", jsonParser, function(req, res, next) {
+  console.log("clearcart route hit", req.body);
+
+  try {
+    var client = myMongo.getClient();
+
+    //let userId = req.body.userId;
+
+    client.connect((err, client) => {
+      myMongo.handleConnection(err);
+
+      const db = client.db(myMongo.dbName);
+      const cart = db.collection("cart");
+
+      cart.deleteMany({}, function(err, result) {
+        if (err) {
+          res.jsonp({
+            data: {
+              status: "NOTOK",
+              message: "Product Not Deleted"
+            }
+          });
+        }
+
+        if (result.deletedCount > 0) {
+          res.jsonp({
+            data: {
+              status: "OK",
+              message: "Product Deleted"
+            }
+          });
+        }
+      });
+    });
+  } catch (error) {
+    res.status(500).jsonp({
+      data: {
+        status: "NOTOK",
+        message: "Internal Error!"
+      }
+    });
+  }
+  res.jsonp({
+    data: {
+      status: "OK",
+      message: "Nothing Happened"
+    }
+  });
   client.close();
 });
 
