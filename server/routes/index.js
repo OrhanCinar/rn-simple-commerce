@@ -13,30 +13,33 @@ router.get("/products", function(req, res, next) {
       const db = client.db(myMongo.dbName);
       const collProducts = db.collection("product");
 
-      collProducts.find().toArray(function(err, result) {
-        if (err) {
-          res.status(500).jsonp({
-            data: {
-              status: "NOTOK"
-            }
-          });
-        }
+      collProducts
+        .find()
+        .sort({ order: 1 })
+        .toArray(function(err, result) {
+          if (err) {
+            res.status(500).jsonp({
+              data: {
+                status: "NOTOK"
+              }
+            });
+          }
 
-        if (result.length > 0) {
-          result.forEach(item => {
-            //console.log(item.imageUrl);
-            item.imageUrl = cdnPath.concat(item.imageUrl);
-          });
-
-          res.status(200).jsonp({
-            data: {
-              status: "OK",
-              products: result
-            }
-          });
-        }
-        //add else condition
-      });
+          if (result.length > 0) {
+            result.forEach(item => {
+              //console.log(item.imageUrl);
+              item.imageUrl = cdnPath.concat(item.imageUrl);
+            });
+            client.close();
+            res.status(200).jsonp({
+              data: {
+                status: "OK",
+                products: result
+              }
+            });
+          }
+          //add else condition
+        });
 
       client.close();
     });
