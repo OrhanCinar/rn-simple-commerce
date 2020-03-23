@@ -19,7 +19,7 @@ function Cart() {
         return response.json();
       })
       .then(json => {
-        console.log(json);
+        //console.log(json);
         setProducts(json.data.cart);
         setTotals(json.data.totals);
       })
@@ -56,7 +56,7 @@ function Cart() {
       <View style={styles.scrollContainer}>
         <ScrollView>
           {products.map(item => (
-            <View style={styles.productContainer}>
+            <View style={styles.productContainer} key={item._id}>
               <Image
                 id={item._id}
                 accessibilityLabel={item.name}
@@ -72,7 +72,7 @@ function Cart() {
               <View style={styles.priceContainer}>
                 <View style={styles.priceRow}>
                   <Text style={styles.priceLabel}>Price :</Text>
-                  <Text style={styles.price}>{item.price}</Text>
+                  <Text style={styles.price}>$ {item.price}</Text>
                 </View>
 
                 <View style={styles.priceRow}>
@@ -82,7 +82,9 @@ function Cart() {
 
                 <View style={styles.priceRow}>
                   <Text style={styles.priceLabel}>Total :</Text>
-                  <Text style={styles.price}>{item.total}</Text>
+                  <Text style={styles.price}>
+                    $ {(item.price * item.quantity).toFixed(2)}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -93,17 +95,17 @@ function Cart() {
       <View style={styles.totalsContainer}>
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>TOTAL :</Text>
-          <Text style={styles.price}>{totals.total}</Text>
+          <Text style={styles.price}>$ {totals.total.toFixed(2)}</Text>
         </View>
 
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>DISCOUNT :</Text>
-          <Text style={styles.price}>{totals.discount}</Text>
+          <Text style={styles.price}>$ {totals.discount.toFixed(2)}</Text>
         </View>
 
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>SUB TOTAL :</Text>
-          <Text style={styles.price}>{totals.subTotal}</Text>
+          <Text style={styles.price}>$ {totals.subTotal.toFixed(2)}</Text>
         </View>
       </View>
     </View>
