@@ -27,7 +27,7 @@ function Main({ navigation, route }) {
   }, []);
 
   useEffect(() => {
-    //getBanners();
+    getBanners();
   }, []);
 
   async function getProducts() {
@@ -68,11 +68,11 @@ function Main({ navigation, route }) {
       <View style={styles.searchBoxContainer}>
         <TextInput placeholder="Search..." style={styles.searchBox}></TextInput>
       </View>
-      {products.length > 0 && (
+      {banners.length > 0 && (
         <View style={styles.bannerContainer}>
           <Image
             url
-            source={{ uri: products[0].imageUrl }}
+            source={{ uri: banners[0].imageUrl }}
             style={styles.bannerImage}
           />
         </View>
