@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export default (styles = StyleSheet.create({
+export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f4f4f4",
@@ -26,32 +26,35 @@ export default (styles = StyleSheet.create({
     //alignSelf: "stretch",
     //width: "100%",
     borderWidth: 0.9,
-    borderColor: "#202020"
+    borderColor: "#202020",
+    borderRadius: 5
   },
 
   productImageContainer: {
     //marginBottom: 10,
     flex: 1,
-    width: 100,
+    width: 75,
     height: 100,
     borderWidth: 0.9,
-    borderColor: "#fc3f4b"
+    borderColor: "#fc3f4b",
+    borderRadius: 5
   },
 
   //Product Info
   productInfoContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    //alignItems: "center",
+    justifyContent: "center",
+    width: 50
   },
   productHeader: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold"
   },
   //Price Container
   priceContainer: {
     flex: 1,
-    marginRight: 5,
+    marginRight: 1,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -60,8 +63,8 @@ export default (styles = StyleSheet.create({
   },
   priceLabel: {
     //alignSelf: "flex-start",
-    textAlign: "left",
-    width: 85
+    textAlign: "left"
+    //  width: 85
   },
   price: {
     flex: 2,
@@ -102,4 +105,4 @@ export default (styles = StyleSheet.create({
     textAlign: "left",
     color: "black"
   }
-}));
+});
