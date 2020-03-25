@@ -52,7 +52,10 @@ function ProductScreen({ route, navigation }) {
   function btnAddToCartHandle() {
     var data = {
       quantity: quantity,
-      productId: product._id
+      productId: product._id,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      name: product.name
     };
 
     // console.log("btnAddToCartHandle", data);
