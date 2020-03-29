@@ -38,7 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "babel-preset-expo": "^8.1.0",
-    "jest": "^25.2.3"
+    "jest": "^25.2.4"
   },
   "private": true
 }
