@@ -34,6 +34,7 @@ app.get("/cart", cartRouter);
 app.post("/addtocart", cartRouter);
 app.post("/removefromcart", cartRouter);
 app.post("/updatecartproduct", cartRouter);
+app.post("/clearcart", cartRouter);
 
 //category
 app.get("/category", categoryRouter);
