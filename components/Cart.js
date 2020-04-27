@@ -15,28 +15,28 @@ function Cart() {
 
   function getCart() {
     fetch(scConfig.CART_URL)
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(json => {
+      .then((json) => {
         //console.log(json);
         setProducts(json.data.cart);
         setTotals(json.data.totals);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
 
   function onRemoveItem() {
     fetch(scConfig.REMOVE_FROM_CART_URL)
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(json => {
+      .then((json) => {
         //alert
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
@@ -55,7 +55,7 @@ function Cart() {
     <View style={styles.container}>
       <View style={styles.scrollContainer}>
         <ScrollView>
-          {products.map(item => (
+          {products.map((item) => (
             <View style={styles.productContainer} key={item._id}>
               <Image
                 id={item._id}
@@ -95,17 +95,17 @@ function Cart() {
       <View style={styles.totalsContainer}>
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>TOTAL :</Text>
-          <Text style={styles.price}>$ {totals.total.toFixed(2)}</Text>
+          <Text style={styles.price}>$ {totals.total}</Text>
         </View>
 
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>DISCOUNT :</Text>
-          <Text style={styles.price}>$ {totals.discount.toFixed(2)}</Text>
+          <Text style={styles.price}>$ {totals.discount}</Text>
         </View>
 
         <View style={styles.totalRow}>
           <Text style={styles.priceLabel}>SUB TOTAL :</Text>
-          <Text style={styles.price}>$ {totals.subTotal.toFixed(2)}</Text>
+          <Text style={styles.price}>$ {totals.subTotal}</Text>
         </View>
       </View>
     </View>
