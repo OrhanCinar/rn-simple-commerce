@@ -13,12 +13,12 @@
     "@react-navigation/drawer": "^5.9.0",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.4",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "expo": "~36.0.0",
     "expo-font": "~8.0.0",
-    "express": "^4.17.3",
+    "express": "^4.22.1",
     "http-errors": "^1.8.0",
     "mongodb": "^3.6.2",
     "morgan": "^1.10.0",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "babel-preset-expo": "^8.2.3",
-    "jest": "^25.5.4"
+    "jest": "^30.2.0"
   },
   "private": true
 }
